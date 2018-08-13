@@ -888,7 +888,7 @@ If Chromium rendering is intermittently choppy, fix it with:
 ```shell
 echo '--disable-gpu-driver-bug-workarounds' >> ~/.config/chromium-flags.conf
 ```
-Visit URL - https://github.com/shubhamgulati91/install-arch-linux/blob/master/install-arch-linux.md
+Visit URL - https://github.com/shubhamgulati91/install-arch-linux
 
 
 #### CONFIGURE SYSTEM SETTINGS
