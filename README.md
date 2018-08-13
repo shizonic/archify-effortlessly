@@ -21,7 +21,7 @@ NVIDIA® GeForce® GTX 960M with 4GB GDDR5 VRAM
 
 #### DOWNLOAD ISO
 
-https://www.archlinux.org/download/
+[https://www.archlinux.org/download/](https://www.archlinux.org/download/)
 
 
 #### CREATE BOOTABLE USB
@@ -541,7 +541,7 @@ This setting allows root login with password authentication on the SSH server.
 
 #### CONFIGURE ZSH
 
-https://wiki.archlinux.org/index.php/Zsh
+[https://wiki.archlinux.org/index.php/Zsh](https://wiki.archlinux.org/index.php/Zsh)
 
 Zsh is a powerful shell that operates as both an interactive shell and as a scripting language interpreter.
 ```shell
@@ -587,7 +587,7 @@ git config --global credential.helper cache && git config --global credential.he
 
 #### SSH
 
-https://wiki.archlinux.org/index.php/Ssh
+[https://wiki.archlinux.org/index.php/Ssh](https://wiki.archlinux.org/index.php/Ssh)
 
 Secure Shell (SSH) is a network protocol that allows data to be exchanged over a secure channel between two computers.
 
@@ -645,21 +645,21 @@ rm -rf /tmp/aurman_install
 
 #### BASH TOOLS
 
-https://wiki.archlinux.org/index.php/Bash
+[https://wiki.archlinux.org/index.php/Bash](https://wiki.archlinux.org/index.php/Bash)
 ```shell 
 sudo pacman -S --noconfirm bc rsync mlocate bash-completion pkgstats arch-wiki-lite
 ```
 
 #### (UN)COMPRESS TOOLS
 
-https://wiki.archlinux.org/index.php/P7zip
+[https://wiki.archlinux.org/index.php/P7zip](https://wiki.archlinux.org/index.php/P7zip)
 ```shell
 sudo pacman -S --noconfirm zip unzip unrar p7zip lzop cpio zziplib 
 ```
 
 #### AVAHI
 
-https://wiki.archlinux.org/index.php/Avahi
+[https://wiki.archlinux.org/index.php/Avahi](https://wiki.archlinux.org/index.php/Avahi)
 
 Avahi is a free Zero Configuration Networking (Zeroconf) implementation, including a system for multicast DNS/DNS-SD discovery. It allows programs to publish and discovers services and hosts running on a local network with no specific configuration.
 
@@ -672,7 +672,7 @@ sudo systemctl enable avahi-daemon.service
 
 #### ALSA
 
-https://wiki.archlinux.org/index.php/Alsa
+[https://wiki.archlinux.org/index.php/Alsa](https://wiki.archlinux.org/index.php/Alsa)
 
 The Advanced Linux Sound Architecture (ALSA) is a Linux kernel component intended to replace the original Open Sound System (OSSv3) for providing device drivers for sound cards.
 ```shell
@@ -681,7 +681,7 @@ sudo pacman -S --noconfirm alsa-utils alsa-plugins
 
 #### PULSEAUDIO
 
-https://wiki.archlinux.org/index.php/Pulseaudio
+[https://wiki.archlinux.org/index.php/Pulseaudio](https://wiki.archlinux.org/index.php/Pulseaudio)
 
 PulseAudio is the default sound server that serves as a proxy to sound applications using existing kernel sound components like ALSA or OSS
 ```shell
@@ -690,7 +690,7 @@ sudo pacman -S --noconfirm pulseaudio pulseaudio-alsa
 
 #### NTFS/FAT/exFAT/F2FS
 
-https://wiki.archlinux.org/index.php/File_Systems
+[https://wiki.archlinux.org/index.php/File_Systems](https://wiki.archlinux.org/index.php/File_Systems)
 
 A file system (or filesystem) is a means to organize data expected to be retained after a program terminates by providing procedures to store, retrieve and update data, as well as manage the available space on the device(s) which contain it. A file system organizes data in an efficient manner and is tuned to the specific characteristics of the device.
 ```shell
@@ -699,7 +699,7 @@ sudo pacman -S --noconfirm ntfs-3g dosfstools exfat-utils f2fs-tools fuse fuse-e
 
 #### SYSTEMD-TIMESYNCD
 
-https://wiki.archlinux.org/index.php/Systemd-timesyncd
+[https://wiki.archlinux.org/index.php/Systemd-timesyncd](https://wiki.archlinux.org/index.php/Systemd-timesyncd)
 
 A file system (or filesystem) is a means to organize data expected to be retained after a program terminates by providing procedures to store, retrieve and update data, as well as manage the available space on the device(s) which contain it. A file system organizes data in an efficient manner and is tuned to the specific characteristics of the device.
 ```shell
@@ -708,7 +708,7 @@ sudo timedatectl set-ntp true
 
 #### XORG
 
-https://wiki.archlinux.org/index.php/Xorg
+[https://wiki.archlinux.org/index.php/Xorg](https://wiki.archlinux.org/index.php/Xorg)
 
 Xorg is the public, open-source implementation of the X window system version 11.
 
@@ -718,7 +718,7 @@ sudo pacman -S xorg xorg-server xorg-apps xorg-xinit xorg-xkill xorg-xinput xf86
 
 #### WAYLAND
 
-https://wiki.archlinux.org/index.php/Wayland
+[https://wiki.archlinux.org/index.php/Wayland](https://wiki.archlinux.org/index.php/Wayland)
 
 Wayland is a protocol for a compositing window manager to talk to its clients, as well as a library implementing the protocol.
 
@@ -732,12 +732,12 @@ sudo pacman -S --noconfirm xf86-input-libinput mousetweaks
 ```
 For touchpad tap-to-click use:
 
-https://wiki.archlinux.org/index.php/Libinput#Common_options
+[https://wiki.archlinux.org/index.php/Libinput#Common_options](https://wiki.archlinux.org/index.php/Libinput#Common_options)
 
 
 #### FONT CONFIGURATION
 
-https://wiki.archlinux.org/index.php/Font_Configuration
+[https://wiki.archlinux.org/index.php/Font_Configuration](https://wiki.archlinux.org/index.php/Font_Configuration)
 
 Fontconfig is a library designed to provide a list of available fonts to applications, and also for configuration for how fonts get rendered.
 ```shell
@@ -851,7 +851,7 @@ sudo systemctl enable gdm.service
 
 #### NETWORKMANAGER
 
-https://wiki.archlinux.org/index.php/Networkmanager
+[https://wiki.archlinux.org/index.php/Networkmanager](https://wiki.archlinux.org/index.php/Networkmanager)
 
 NetworkManager is a program for providing detection and configuration for systems to automatically connect to network. NetworkManager's functionality can be useful for both wireless and wired networks.
 ```shell
@@ -888,7 +888,7 @@ If Chromium rendering is intermittently choppy, fix it with:
 ```shell
 echo '--disable-gpu-driver-bug-workarounds' >> ~/.config/chromium-flags.conf
 ```
-Visit URL - https://github.com/shubhamgulati91/install-arch-linux
+Visit URL - [https://github.com/shubhamgulati91/install-arch-linux](https://github.com/shubhamgulati91/install-arch-linux)
 
 
 #### CONFIGURE SYSTEM SETTINGS
@@ -1015,37 +1015,23 @@ sudo pacman -S --noconfirm chrome-gnome-shell
 ```
 Use web browser and go to:
 
-https://extensions.gnome.org/
+[https://extensions.gnome.org/](https://extensions.gnome.org/)
 
 Choose "Allow and remember" when prompted for shell integration permission.
 
 Install and configure extensions:
 
-Dash to Dock - moves dock to bottom of screen
+[Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/) - moves dock to bottom of screen
 
-https://extensions.gnome.org/extension/307/dash-to-dock/
+[Dynamic Top Bar](https://extensions.gnome.org/extension/885/dynamic-top-bar/) - transparency level 0.30
 
-Dynamic Top Bar - transparency level 0.30
+[NetSpeed](https://extensions.gnome.org/extension/104/netspeed/)
 
-https://extensions.gnome.org/extension/885/dynamic-top-bar/
+[Refresh Wifi Connections](https://extensions.gnome.org/extension/905/refresh-wifi-connections/)
 
-NetSpeed
+[Todo.txt](https://extensions.gnome.org/extension/570/todotxt/)
 
-https://extensions.gnome.org/extension/104/netspeed/
-
-Refresh Wifi Connections
-
-https://extensions.gnome.org/extension/905/refresh-wifi-connections/
-
-Todo.txt
-
-https://extensions.gnome.org/extension/570/todotxt/
-
-Media player indicator
-
-https://extensions.gnome.org/extension/55/media-player-indicator/
-
-Extensions can me managed after installation from Gnome Tweak Tool.
+[Media player indicator](https://extensions.gnome.org/extension/55/media-player-indicator/)
 
 
 #### CONFIGURE SWAPPINESS
@@ -1058,7 +1044,7 @@ sudo sysctl vm.swappiness=1
 
 #### TLP
 
-https://wiki.archlinux.org/index.php/Tlp
+[https://wiki.archlinux.org/index.php/Tlp](https://wiki.archlinux.org/index.php/Tlp)
 
 TLP is an advanced power management tool for Linux. It is a pure command line tool with automated background tasks and does not contain a GUI.
 
@@ -1141,7 +1127,7 @@ sudo systemctl enable --now fstrim.timer
 
 #### [RECOMMENDED] CONFIGURE BLUETOOTH
 
-https://wiki.archlinux.org/index.php/Bluetooth
+[https://wiki.archlinux.org/index.php/Bluetooth](https://wiki.archlinux.org/index.php/Bluetooth)
 
 Bluetooth is a standard for the short-range wireless interconnection of cellular phones, computers, and other electronic devices. In Linux, the canonical implementation of the Bluetooth protocol stack is BlueZ.
 ```shell
@@ -1185,7 +1171,7 @@ sudo pacman -Rnsc --noconfirm atomix four-in-a-row five-or-more gnome-chess gnom
 
 Follow the guide to install Viper4Linux.
 
-https://github.com/L3vi47h4N/Viper4Linux
+[https://github.com/L3vi47h4N/Viper4Linux](https://github.com/L3vi47h4N/Viper4Linux)
 
 To start Viper after login:
 ```shell
@@ -1195,7 +1181,7 @@ echo 'viper start &' >> ~/.bash_profile
 
 #### CUPS
 
-https://wiki.archlinux.org/index.php/Cups
+[https://wiki.archlinux.org/index.php/Cups](https://wiki.archlinux.org/index.php/Cups)
 
 CUPS is the standards-based, open source printing system developed by Apple Inc. for Mac OS X and other UNIX-like operating systems.
 
@@ -1206,7 +1192,7 @@ sudo systemctl enable --now org.cups.cupsd.service
 
 #### NFS
 
-https://wiki.archlinux.org/index.php/Nfs
+[https://wiki.archlinux.org/index.php/Nfs](https://wiki.archlinux.org/index.php/Nfs)
 
 NFS allowing a user on a client computer to access files over a network in a manner similar to how local storage is accessed.
 ```shell
@@ -1220,7 +1206,7 @@ sudo systemctl enable remote-fs.target
 
 #### [OPTIONAL] CONFIGURE USB MODEM
 
-https://wiki.archlinux.org/index.php/USB_3G_Modem
+[https://wiki.archlinux.org/index.php/USB_3G_Modem](https://wiki.archlinux.org/index.php/USB_3G_Modem)
 
 A number of mobile telephone networks around the world offer mobile internet connections over UMTS (or EDGE or GSM) using a portable USB modem device.
 ```shell
@@ -1321,7 +1307,7 @@ sudo pacman -Rdd <package list>
 
 Learn more about Pacman on the wiki page at:
 
-https://wiki.archlinux.org/index.php/pacman
+[https://wiki.archlinux.org/index.php/pacman](https://wiki.archlinux.org/index.php/pacman)
 
 
 
@@ -1400,7 +1386,7 @@ kpsewhich moderncv.cls
 
 #### LIBREOFFICE
 
-https://wiki.archlinux.org/index.php/LibreOffice
+[https://wiki.archlinux.org/index.php/LibreOffice](https://wiki.archlinux.org/index.php/LibreOffice)
 ```shell
 sudo pacman -S --noconfirm libreoffice-fresh
 ```
@@ -1943,7 +1929,7 @@ sudo pacman -Rsc --noconfirm $(pacman -Qqdt)
 
 #### HOSTNAME
 
-https://wiki.archlinux.org/index.php/HOSTNAME
+[https://wiki.archlinux.org/index.php/HOSTNAME](https://wiki.archlinux.org/index.php/HOSTNAME)
 
 A host name is a unique name created to identify a machine on a network.Host names are restricted to alphanumeric characters.\nThe hyphen (-) can be used, but a host name cannot start or end with it. Length is restricted to 63 characters.
 ```shell
@@ -1952,7 +1938,7 @@ sudo hostnamectl set-hostname
 
 #### TIMEZONE
 
-https://wiki.archlinux.org/index.php/Timezone
+[https://wiki.archlinux.org/index.php/Timezone](https://wiki.archlinux.org/index.php/Timezone)
 
 In an operating system the time (clock) is determined by four parts: Time value, Time standard, Time Zone, and DST (Daylight Saving Time if applicable).
 ```shell
@@ -1961,7 +1947,7 @@ sudo timedatectl set-timezone Asia/Kolkata
 
 #### HARDWARE CLOCK TIME
 
-https://wiki.archlinux.org/index.php/Internationalization
+[https://wiki.archlinux.org/index.php/Internationalization](https://wiki.archlinux.org/index.php/Internationalization)
 
 This is set in /etc/adjtime. Set the hardware clock mode uniformly between your operating systems on the same machine. Otherwise, they will overwrite the time and cause clock shifts (which can cause time drift correction to be miscalibrated).
 ```shell
@@ -2008,4 +1994,4 @@ journalctl --vacuum-size=100M
 
 #### A little show-off at
 
-https://github.com/shubhamgulati91/install-arch-linux-screenshots/tree/master/0-screenshots
+[https://github.com/shubhamgulati91/install-arch-linux-screenshots/tree/master/0-screenshots](https://github.com/shubhamgulati91/install-arch-linux-screenshots/tree/master/0-screenshots)
