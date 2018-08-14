@@ -764,7 +764,10 @@ sudo mkinitcpio -p linux
 
 ###### [RECOMMENDED] BUMBLEBEE (NVIDIA)
 ```shell
-sudo pacman -S --needed xf86-video-intel bumblebee nvidia nvidia-settings lib32-virtualgl lib32-nvidia-utils mesa lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
+sudo pacman -S --needed bumblebee bbswitch mesa nvidia xf86-video-intel lib32-virtualgl lib32-nvidia-utils
+```
+```
+extras: nvidia-settings lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
 ```
 ```
 NOTE: Pick nvidia-utils if conflict.
@@ -1150,14 +1153,13 @@ The first two lines disable bluetooth and the last disables the webcam.
 
 #### DISABLE dGPU
 ```shell
-sudo pacman -S --noconfirm dkms bbswitch-dkms
+sudo pacman -S --noconfirm dkms bbswitch
 sudo /bin/sh -c 'echo "# Disable Alternate Driver" >> /etc/modprobe.d/50-disable-dGPU.conf'
 sudo /bin/sh -c 'echo "blacklist nouveau" >> /etc/modprobe.d/50-disable-dGPU.conf'
 sudo /bin/sh -c 'echo "# Disable Original Driver" >> /etc/modprobe.d/50-disable-dGPU.conf'
 sudo /bin/sh -c 'echo "blacklist nvidia" >> /etc/modprobe.d/50-disable-dGPU.conf'
 sudo /bin/sh -c 'echo "blacklist nvidia_drm" >> /etc/modprobe.d/50-disable-dGPU.conf'
-sudo /bin/sh -c 'echo "# Switch off dGPU" >> /etc/modules'
-sudo /bin/sh -c 'echo "bbswitch load_state=0" >> /etc/modules'
+sudo /bin/sh -c 'echo "options bbswitch load_state=0 unload_state=0" >> /etc/modprobe.d/bbswitch.conf'
 ```
 
 #### CONFIGURE CRON JOBS FOR POWER SAVING
