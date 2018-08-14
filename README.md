@@ -367,7 +367,7 @@ echo '127.0.1.1       zenbook-pro.localdomain localhost zenbook-pro' >> /etc/hos
 
 
 #### CONFIGURE MULTILIB
- 
+
 If you are running a 64-bit system then you need to enable the multilib repository as follows:
 ```shell
 sed -i '/^#\[multilib\]/s/^#//' /etc/pacman.conf
@@ -448,7 +448,7 @@ title		Arch Linux
 linux		/vmlinuz-linux
 initrd		/intel-ucode.img
 initrd		/initramfs-linux.img
-options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.preliminary_hw_support=1 intel_idle.max_cstate=1 i915.enable_execlists=0 acpi_osi= acpi_backlight=native elevator=noop splash quiet vga=current loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3 nmi_watchdog=0
+options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2 acpi_osi=\"Windows 2015\" acpi_osi=! pcie_aspm=force pcie_aspm.policy=powersupersave drm.vblankoffdelay=1 nmi_watchdog=0 elevator=noop splash quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3
 ```
 Now configure boot loader to boot using the above configuration:
 ```shell
@@ -646,7 +646,7 @@ rm -rf /tmp/aurman_install
 #### BASH TOOLS
 
 [https://wiki.archlinux.org/index.php/Bash](https://wiki.archlinux.org/index.php/Bash)
-```shell 
+```shell
 sudo pacman -S --noconfirm bc rsync mlocate bash-completion pkgstats arch-wiki-lite
 ```
 
@@ -654,7 +654,7 @@ sudo pacman -S --noconfirm bc rsync mlocate bash-completion pkgstats arch-wiki-l
 
 [https://wiki.archlinux.org/index.php/P7zip](https://wiki.archlinux.org/index.php/P7zip)
 ```shell
-sudo pacman -S --noconfirm zip unzip unrar p7zip lzop cpio zziplib 
+sudo pacman -S --noconfirm zip unzip unrar p7zip lzop cpio zziplib
 ```
 
 #### AVAHI
@@ -750,9 +750,6 @@ sudo pacman -S --noconfirm --asdeps --needed cairo fontconfig freetype2
 
 If you do not know what graphics card you have, find out by issuing:
 ```shell
-sudo pacman -S --noconfirm dmidecode
-```
-```shell
 lspci -k | grep -A 2 -E "(VGA|3D)"
 ```
 For the system I'm using to generate this guide, I use NVIDIA driver. You can use the output from the above command to determine what driver you need.
@@ -767,7 +764,10 @@ sudo mkinitcpio -p linux
 
 ###### [RECOMMENDED] BUMBLEBEE (NVIDIA)
 ```shell
-sudo pacman -S --needed xf86-video-intel bumblebee nvidia nvidia-settings lib32-virtualgl lib32-nvidia-utils mesa lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
+sudo pacman -S --needed bumblebee bbswitch mesa nvidia xf86-video-intel lib32-virtualgl lib32-nvidia-utils
+```
+```
+extras: nvidia-settings lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
 ```
 ```
 NOTE: Pick nvidia-utils if conflict.
@@ -798,7 +798,7 @@ sudo pacman -S nvidia nvidia-libgl lib32-nvidia-libgl
 Open Source GPU Drivers:
 ```shell
 sudo pacman -S xf86-video-intel mesa libva-intel-driver lib32-mesa lib32-libva-intel-driver
-```	
+```
 
 #### ATI CARDS
 
@@ -1042,6 +1042,82 @@ sudo /bin/sh -c 'echo "vm.swappiness=1" >> /etc/sysctl.d/99-sysctl.conf'
 sudo sysctl vm.swappiness=1
 ```
 
+## POWER ENHANCEMENTS
+
+[http://arter97.blogspot.com/2018/08/saving-power-consumption-on-laptops.html?m=1](http://arter97.blogspot.com/2018/08/saving-power-consumption-on-laptops.html?m=1)
+
+#### TL;DR
+```shell
+sudo nano /boot/loader/entries/arch.conf
+```
+Set kernel options to:
+```
+options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2 acpi_osi=\"Windows 2015\" acpi_osi=! pcie_aspm=force pcie_aspm.policy=powersupersave drm.vblankoffdelay=1 nmi_watchdog=0 elevator=noop splash quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3
+```
+
+#### INSTALL LATEST KERNEL
+```shell
+sudo pacman -Sy linux
+```
+
+#### INSTALL LATEST FIRMWARE
+```shell
+sudo pacman -Sy intel-ucode linux-firmware
+```
+
+#### ENABLE GUC, HUC AND PSR FOR i915
+```shell
+sudo nano /boot/loader/entries/arch.conf
+```
+Add kernel options:
+```shell
+i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2
+```
+```shell
+sudo systemctl reboot
+```
+Verify:
+```shell
+dmesg | grep GuC
+dmesg | grep HuC
+dmesg | grep psr
+```
+```
+[drm] HuC: Loaded firmware i915/kbl_huc_ver02_00_1810.bin (version 2.0)
+[drm] GuC: Loaded firmware i915/kbl_guc_ver9_39.bin (version 9.39)
+i915 0000:00:02.0: GuC firmware version 9.39
+i915 0000:00:02.0: GuC submission enabled
+i915 0000:00:02.0: HuC enabled
+Setting dangerous option enable_psr - tainting kernel
+```
+
+#### TRICKING THE BIOS
+```shell
+sudo nano /boot/loader/entries/arch.conf
+```
+Add kernel options:
+```shell
+acpi_osi=\"Windows 2015\" acpi_osi=!
+```
+
+#### ENABLE ASPM
+```shell
+sudo nano /boot/loader/entries/arch.conf
+```
+Add kernel options:
+```shell
+pcie_aspm=force pcie_aspm.policy=powersupersave
+```
+
+#### ADJUSTING DRM VBLANK OFF DELAY
+```shell
+sudo nano /boot/loader/entries/arch.conf
+```
+Add kernel options:
+```shell
+drm.vblankoffdelay=1
+```
+
 #### TLP
 
 [https://wiki.archlinux.org/index.php/Tlp](https://wiki.archlinux.org/index.php/Tlp)
@@ -1049,7 +1125,7 @@ sudo sysctl vm.swappiness=1
 TLP is an advanced power management tool for Linux. It is a pure command line tool with automated background tasks and does not contain a GUI.
 
 ```shell
-sudo pacman -S --noconfirm tlp ethtool smartmontools x86_energy_perf_policy
+sudo pacman -S --noconfirm tlp tlp-rdw ethtool smartmontools x86_energy_perf_policy
 ```
 Disable powersaving for sound card to reduce background hiss/coil whine while using headphones.
 ```shell
@@ -1060,8 +1136,35 @@ Enable TLP Service on boot
 ```shell
 sudo systemctl enable tlp.service
 sudo systemctl enable tlp-sleep.service
+sudo systemctl enable NetworkManager-dispatcher.service
 sudo systemctl mask systemd-rfkill.service
 sudo systemctl mask systemd-rfkill.socket
+```
+
+#### DISABLE DEVICES TO SAVE POWER
+```shell
+sudo /bin/sh -c 'echo "#  Disable Bluetooth" >> /etc/modprobe.d/50-disable-bluetooth.conf'
+sudo /bin/sh -c 'echo "blacklist bluetooth" >> /etc/modprobe.d/50-disable-bluetooth.conf'
+sudo /bin/sh -c 'echo "blacklist btusb" >> /etc/modprobe.d/50-disable-bluetooth.conf'
+sudo /bin/sh -c 'echo "# Disable Webcam" >> /etc/modprobe.d/50-disable-webcam.conf'
+sudo /bin/sh -c 'echo "blacklist uvcvideo" >> /etc/modprobe.d/50-disable-webcam.conf'
+```
+The first two lines disable bluetooth and the last disables the webcam.
+
+#### DISABLE dGPU
+```shell
+sudo pacman -S --noconfirm dkms bbswitch
+sudo /bin/sh -c 'echo "# Disable Alternate Driver" >> /etc/modprobe.d/50-disable-dGPU.conf'
+sudo /bin/sh -c 'echo "blacklist nouveau" >> /etc/modprobe.d/50-disable-dGPU.conf'
+sudo /bin/sh -c 'echo "# Disable Original Driver" >> /etc/modprobe.d/50-disable-dGPU.conf'
+sudo /bin/sh -c 'echo "blacklist nvidia" >> /etc/modprobe.d/50-disable-dGPU.conf'
+sudo /bin/sh -c 'echo "blacklist nvidia_drm" >> /etc/modprobe.d/50-disable-dGPU.conf'
+sudo /bin/sh -c 'echo "options bbswitch load_state=0 unload_state=0" >> /etc/modprobe.d/bbswitch.conf'
+```
+
+#### CONFIGURE CRON JOBS FOR POWER SAVING
+```shell
+sudo pacman -S --noconfirm cronie
 ```
 
 #### POWERTOP
@@ -1074,11 +1177,11 @@ sudo nano /etc/systemd/system/powertop.service
 ```
 ```
 [Unit]
-Description=Powertop tunings
+Description=PowerTOP Tunings
 
 [Service]
-Type=oneshot
 ExecStart=/usr/bin/powertop --auto-tune
+RemainAfterExit=true
 
 [Install]
 WantedBy=multi-user.target
@@ -1091,6 +1194,13 @@ See power statistics using powertop
 ```shell
 sudo powertop
 ```
+Confirm Idle Stats:
+```
+Pkg(HW) -> C8(pc8) - C10(pc10)
+Core -> C7 (cc7)
+GPU -> RC6
+CPU [0-7] -> C8 - C10
+```
 
 #### CPU/HDD TEMPERATURE
 ```shell
@@ -1098,17 +1208,6 @@ sudo pacman -S --noconfirm lm_sensors hddtemp
 sensors
 sudo hddtemp /dev/nvme0n1
 ```
-
-#### DISABLE WEBCAM/BLUETOOTH TO SAVE POWER
-
-This is optional. I didn’t bother to fix bluetooth quirks, as I don’t use it. So I disabled bluetooth to save power. The webcam service I disabled too, because there are no drivers at the moment anyway.
-```shell
-sudo /bin/sh -c 'echo "blacklist bluetooth" >> /etc/modprobe.d/50-disabling.conf'
-sudo /bin/sh -c 'echo "blacklist btusb" >> /etc/modprobe.d/50-disabling.conf'
-sudo /bin/sh -c 'echo "blacklist uvcvideo" >> /etc/modprobe.d/50-disabling.conf'
-```
-The first two lines disable bluetooth and the last disables the webcam service.
-
 
 #### CONFIGURE PERIODIC TRIM FOR SSD
 
@@ -1317,7 +1416,7 @@ Most functions are similar to pacman.
 
 #### INSTALL PACKAGES FROM AUR
 ```shell
-aurman -S 
+aurman -S
 ```
 
 #### UPGRADE DATABASE AND PACKAGES FROM AUR
@@ -1549,7 +1648,7 @@ sudo pacman -S --noconfirm audacity easytag soundconverter
 
 #### MULTIMEDIA CODECS
 ```shell
-sudo pacman -S --noconfirm gstreamer flashplugin pepper-flash faac faad2 libdca libmad libmpeg2 x264 x265 libfdk-aac libquicktime 
+sudo pacman -S --noconfirm gstreamer flashplugin pepper-flash faac faad2 libdca libmad libmpeg2 x264 x265 libfdk-aac libquicktime
 ```
 ```shell
 aurman -S --noconfirm --noedit chromium-widevine
@@ -1587,6 +1686,11 @@ sudo pacman -S --noconfirm gparted screenfetch dconf-editor bleachbit hdparm dst
 
 
 #### DEVELOPMENT
+
+#### GEANY
+```shell
+sudo pacman -S --noconfirm geany
+```
 
 #### ATOM
 ```shell
@@ -1987,7 +2091,6 @@ Journal files are located at /var/log/journal/
 ```shell
 journalctl --vacuum-size=100M
 ```
-
 
 ## THE END
 
