@@ -1,4 +1,4 @@
-![](![](arch-logo.png?raw=true))
+![](arch-logo.png?raw=true)
 
 # INSTALL ARCH LINUX
 
