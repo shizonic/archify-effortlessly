@@ -1,4 +1,4 @@
-<img src="arch-logo.png" class="img-responsive" alt=""> </div>
+<img src="arch-logo.png" class="img-responsive" alt="">
 
 # INSTALL ARCH LINUX EFFORT-LESSLY
 
