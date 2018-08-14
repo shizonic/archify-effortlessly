@@ -297,7 +297,7 @@ Fstab is a system configuration file and is used to tell the Linux kernel which 
 
 Now generate a new fstab file with:
 ```shell
-genfstab -U -p /mnt >> /mnt/etc/fstab
+rm /mnt/etc/fstab && genfstab -U -p /mnt >> /mnt/etc/fstab
 ```
 
 
@@ -713,7 +713,8 @@ sudo timedatectl set-ntp true
 Xorg is the public, open-source implementation of the X window system version 11.
 
 ```shell
-sudo pacman -S xorg xorg-server xorg-apps xorg-xinit xorg-xkill xorg-xinput xf86-input-libinput xorg-xbacklight xbindkeys xorg-twm xorg-xclock xdotool mesa
+sudo pacman -S xorg-server xorg-server-utils xorg-xbacklight xbindkeys xorg-xinit xorg-xinput xorg-twm xorg-xclock xterm xdotool
+
 ```
 
 #### WAYLAND
@@ -764,7 +765,7 @@ sudo mkinitcpio -p linux
 
 ###### [RECOMMENDED] BUMBLEBEE (NVIDIA)
 ```shell
-sudo pacman -S --needed bumblebee bbswitch mesa nvidia xf86-video-intel lib32-virtualgl lib32-nvidia-utils
+sudo pacman -S --needed bumblebee bbswitch mesa xf86-video-intel nvidia lib32-virtualgl lib32-nvidia-utils lib32-mesa-libgl
 ```
 ```
 extras: nvidia-settings lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
