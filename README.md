@@ -448,7 +448,7 @@ title		Arch Linux
 linux		/vmlinuz-linux
 initrd		/intel-ucode.img
 initrd		/initramfs-linux.img
-options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2 acpi_osi=\"Windows 2015\" acpi_osi=! pcie_aspm=force pcie_aspm.policy=powersupersave drm.vblankoffdelay=1 nmi_watchdog=0 elevator=noop splash quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3
+options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2 drm.vblankoffdelay=1 i915.enable_rc6=1 i915.lvds_downclock=1 i915.semaphores=1 acpi_osi=! acpi_osi="Windows 2015" acpi_backlight=native pcie_aspm=force pcie_aspm.policy=powersupersave nmi_watchdog=0 elevator=noop splash quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3
 ```
 Now configure boot loader to boot using the above configuration:
 ```shell
@@ -1052,7 +1052,7 @@ sudo nano /boot/loader/entries/arch.conf
 ```
 Set kernel options to:
 ```
-options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2 acpi_osi=\"Windows 2015\" acpi_osi=! pcie_aspm=force pcie_aspm.policy=powersupersave drm.vblankoffdelay=1 nmi_watchdog=0 elevator=noop splash quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3
+options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2 drm.vblankoffdelay=1 i915.enable_rc6=1 i915.lvds_downclock=1 i915.semaphores=1 acpi_osi=! acpi_osi="Windows 2015" acpi_backlight=native pcie_aspm=force pcie_aspm.policy=powersupersave nmi_watchdog=0 elevator=noop splash quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3
 ```
 
 #### INSTALL LATEST KERNEL
@@ -1065,13 +1065,18 @@ sudo pacman -Sy linux
 sudo pacman -Sy intel-ucode linux-firmware
 ```
 
-#### ENABLE GUC, HUC AND PSR FOR i915
+#### CONFIGURE i915
 ```shell
 sudo nano /boot/loader/entries/arch.conf
 ```
 Add kernel options:
+```
+i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2 i915.enable_rc6=1 i915.lvds_downclock=1 i915.semaphores=1
+
+```
+Or, alternatively:
 ```shell
-i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2
+sudo /bin/sh -c 'echo "options i915 enable_guc=3 enable_psr=2 enable_fbc=1 enable_dc=2" >> /etc/modprobe.d/i915.conf'
 ```
 ```shell
 sudo systemctl reboot
@@ -1091,13 +1096,23 @@ i915 0000:00:02.0: HuC enabled
 Setting dangerous option enable_psr - tainting kernel
 ```
 
-#### TRICKING THE BIOS
+#### ADJUSTING DRM VBLANK OFF DELAY
 ```shell
 sudo nano /boot/loader/entries/arch.conf
 ```
 Add kernel options:
+```
+drm.vblankoffdelay=1
+```
+
+#### TRICKING THE BIOS
+
 ```shell
-acpi_osi=\"Windows 2015\" acpi_osi=!
+sudo nano /boot/loader/entries/arch.conf
+```
+Add kernel options:
+```
+acpi_osi=! acpi_osi="Windows 2015" acpi_backlight=native
 ```
 
 #### ENABLE ASPM
@@ -1105,17 +1120,8 @@ acpi_osi=\"Windows 2015\" acpi_osi=!
 sudo nano /boot/loader/entries/arch.conf
 ```
 Add kernel options:
-```shell
+```
 pcie_aspm=force pcie_aspm.policy=powersupersave
-```
-
-#### ADJUSTING DRM VBLANK OFF DELAY
-```shell
-sudo nano /boot/loader/entries/arch.conf
-```
-Add kernel options:
-```shell
-drm.vblankoffdelay=1
 ```
 
 #### TLP
@@ -1127,10 +1133,9 @@ TLP is an advanced power management tool for Linux. It is a pure command line to
 ```shell
 sudo pacman -S --noconfirm tlp tlp-rdw ethtool smartmontools x86_energy_perf_policy
 ```
-Disable powersaving for sound card to reduce background hiss/coil whine while using headphones.
+Modify TLP configuration:
 ```shell
-sudo sed -i -e 's/^SOUND_POWER_SAVE_ON_AC=.*/SOUND_POWER_SAVE_ON_AC=0/' /etc/default/tlp
-sudo sed -i -e 's/^SOUND_POWER_SAVE_ON_BAT=.*/SOUND_POWER_SAVE_ON_BAT=0/' /etc/default/tlp
+sudo nano /etc/default/tlp
 ```
 Enable TLP Service on boot
 ```shell
@@ -1141,7 +1146,89 @@ sudo systemctl mask systemd-rfkill.service
 sudo systemctl mask systemd-rfkill.socket
 ```
 
-#### DISABLE DEVICES TO SAVE POWER
+#### REMOVE DEVICES AT BOOT AND RESUME
+
+Type 'lsusb' and 'lsusb -v' to see USB devices.
+```shell
+sudo lsusb -v
+```
+In my case, "ID 04f2:b3fd" is a webcam and "ID 8087:0a2b" is a Bluetooth adapter, which I know I won't be using.
+
+```shell
+sudo nano /etc/remove-unused-usb-devices.sh
+```
+```
+#!/bin/bash
+
+exec > /dev/kmsg 2>&1
+
+sleep 3
+find /sys -name idProduct | while read file; do
+  if cat $file | grep -q 'b3fd\|0a2b'; then
+    echo Removing $(dirname $file)
+    echo 1 > $(dirname $file)/remove
+  fi
+done
+```
+```shell
+sudo chmod 755 /etc/remove-unused-usb-devices.sh
+```
+The part you need to change is at "grep -q '562e\|0a2b'".
+The syntax is simple, just append new devices followed by "\|":
+grep -q '0000\|1111\|2222\|3333\|4444'
+
+Now, for it to execute upon reboot, let's use crontab:
+```shell
+sudo pacman -S --noconfirm cronie
+```
+```shell
+sudo crontab -e
+```
+```
+@reboot /etc/remove-unused-usb-devices.sh
+```
+If you need to access those blacklisted USB devices, just remove the script and suspend/resume your laptop.
+
+Now we need to execute the script upon resume. Let's write a systemd service for that:
+```shell
+sudo nano /lib/systemd/system/remove-unused-usb-devices-upon-resume.service
+```
+```
+[Unit]
+Description=Laptop suspend
+Before=sleep.target
+StopWhenUnneeded=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStop=/etc/remove-unused-usb-devices.sh
+
+[Install]
+WantedBy=sleep.target
+```
+```shell
+sudo systemctl enable --now remove-unused-usb-devices-upon-resume.service
+```
+You can validate whether it works by checking kernel log with dmesg:
+```
+[10838.133311] Removing /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5
+[10838.296408] usb 1-5: USB disconnect, device number 2
+[10838.310044] Removing /sys/devices/pci0000:00/0000:00:14.0/usb1/1-6
+[10838.454298] usb 1-6: USB disconnect, device number 3
+```
+
+#### DISABLE UNUSED PCIe PERIPHERALS
+```shell
+sudo lspci | grep -v 00:
+```
+In my case, 01:00.0 is dGPU Card, 02:00.0 is a PCIe microSD reader, 03:00.0 is Wi-Fi Card, and 04:00.0 is a NVMe SSD.
+
+Disabling PCIe peripherals is a more straight forward process. We can just disable loading of a device driver that is responsible for such device.
+```shell
+sudo lspci -v
+```
+'lspci -v' will print out which kernel modules are responsible for each devices.
 ```shell
 sudo /bin/sh -c 'echo "#  Disable Bluetooth" >> /etc/modprobe.d/50-disable-bluetooth.conf'
 sudo /bin/sh -c 'echo "blacklist bluetooth" >> /etc/modprobe.d/50-disable-bluetooth.conf'
@@ -1160,11 +1247,6 @@ sudo /bin/sh -c 'echo "# Disable Original Driver" >> /etc/modprobe.d/50-disable-
 sudo /bin/sh -c 'echo "blacklist nvidia" >> /etc/modprobe.d/50-disable-dGPU.conf'
 sudo /bin/sh -c 'echo "blacklist nvidia_drm" >> /etc/modprobe.d/50-disable-dGPU.conf'
 sudo /bin/sh -c 'echo "options bbswitch load_state=0 unload_state=0" >> /etc/modprobe.d/bbswitch.conf'
-```
-
-#### CONFIGURE CRON JOBS FOR POWER SAVING
-```shell
-sudo pacman -S --noconfirm cronie
 ```
 
 #### POWERTOP
@@ -1196,10 +1278,10 @@ sudo powertop
 ```
 Confirm Idle Stats:
 ```
-Pkg(HW) -> C8(pc8) - C10(pc10)
-Core -> C7 (cc7)
-GPU -> RC6
-CPU [0-7] -> C8 - C10
+Package		-> C8(pc8) - C10(pc10)
+Core		-> C7 (cc7)
+GPU			-> RC6
+CPU [0-7]	-> C8 - C10
 ```
 
 #### CPU/HDD TEMPERATURE
@@ -1264,6 +1346,11 @@ Restart, and check that there is no Pulseaudio process for the gdm user.
 #### REMOVE GNOME GAMES
 ```shell
 sudo pacman -Rnsc --noconfirm atomix four-in-a-row five-or-more gnome-chess gnome-klotski gnome-mahjongg gnome-mines gnome-nibbles gnome-robots gnome-sudoku gnome-tetravex gnome-taquin swell-foop hitori iagno quadrapassel lightsoff tali
+```
+
+#### FIX NOISE IN HEADPHONES
+```shell
+sudo /bin/sh 'echo "options snd-hda-intel model=dell-headset-multi" >> /etc/modprobe.d/alsa-base.conf'
 ```
 
 #### VIPER4LINUX
