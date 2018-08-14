@@ -1280,7 +1280,7 @@ Confirm Idle Stats:
 ```
 Package		-> C8(pc8) - C10(pc10)
 Core		-> C7 (cc7)
-GPU			-> RC6
+GPU		-> RC6
 CPU [0-7]	-> C8 - C10
 ```
 
