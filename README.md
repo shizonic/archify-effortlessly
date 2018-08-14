@@ -1195,7 +1195,7 @@ sudo nano /lib/systemd/system/remove-unused-usb-devices-upon-resume.service
 ```
 ```
 [Unit]
-Description=Laptop suspend
+Description=Remove Unused USB Devices Upon Resume
 Before=sleep.target
 StopWhenUnneeded=yes
 
@@ -1253,7 +1253,7 @@ sudo /bin/sh -c 'echo "options bbswitch load_state=0 unload_state=0" >> /etc/mod
 ```shell
 sudo pacman -S --noconfirm powertop
 ```
-Create a new systemd service "/etc/systemd/system/powertop.service":
+Create a new systemd service:
 ```shell
 sudo nano /etc/systemd/system/powertop.service
 ```
@@ -1270,7 +1270,7 @@ WantedBy=multi-user.target
 ```
 Save and enable it with:
 ```shell
-sudo systemctl --now enable powertop.service
+sudo systemctl enable --now powertop.service
 ```
 See power statistics using powertop
 ```shell
