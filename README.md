@@ -42,7 +42,7 @@ sudo parted --script -a optimal /dev/sda \
 parted /dev/sda 'unit GiB print'
 gdisk -l /dev/sda
 echo
-sudo mkfs.vfat -F32  -n ARCH /dev/sda1
+sudo mkfs.vfat -F32 -n ARCH /dev/sda1
 lsblk /dev/sda
 echo
 sudo dd bs=4M if=`ls ~/Downloads/archlinux-*-x86_64.iso` of=/dev/sda status=progress oflag=sync
@@ -210,7 +210,7 @@ gdisk -l /dev/nvme0n1
 echo
 mkfs.ext4 -F -L ROOT /dev/nvme0n1p2
 mount -t ext4 /dev/nvme0n1p2 /mnt
-mkfs.vfat -F32  -n BOOT /dev/nvme0n1p1
+mkfs.vfat -F32 -n BOOT /dev/nvme0n1p1
 mkdir -p /mnt/boot
 mount -t vfat /dev/nvme0n1p1 /mnt/boot
 mkswap -L SWAP /dev/nvme0n1p3
