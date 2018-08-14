@@ -1,6 +1,8 @@
 ![](arch-logo.png?raw=true)
 
-# INSTALL ARCH LINUX
+# INSTALL ARCH LINUX EFFORT-LESSLY
+
+[http://shubhamgulati91.github.io/install-arch-linux-effortlessly](http://shubhamgulati91.github.io/install-arch-linux-effortlessly)
 
 
 #### AUTHOR - SHUBHAM GULATI
