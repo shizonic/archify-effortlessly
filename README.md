@@ -448,7 +448,7 @@ title		Arch Linux
 linux		/vmlinuz-linux
 initrd		/intel-ucode.img
 initrd		/initramfs-linux.img
-options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.enable_guc=3 i915.enable_psr=2 acpi_osi=\"Windows 2015\" acpi_osi=! pcie_aspm=force pcie_aspm.policy=powersupersave drm.vblankoffdelay=1 elevator=noop splash quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3 nmi_watchdog=0
+options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2 acpi_osi=\"Windows 2015\" acpi_osi=! pcie_aspm=force pcie_aspm.policy=powersupersave drm.vblankoffdelay=1 nmi_watchdog=0 elevator=noop splash quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3
 ```
 Now configure boot loader to boot using the above configuration:
 ```shell
@@ -750,9 +750,6 @@ sudo pacman -S --noconfirm --asdeps --needed cairo fontconfig freetype2
 
 If you do not know what graphics card you have, find out by issuing:
 ```shell
-sudo pacman -S --noconfirm dmidecode
-```
-```shell
 lspci -k | grep -A 2 -E "(VGA|3D)"
 ```
 For the system I'm using to generate this guide, I use NVIDIA driver. You can use the output from the above command to determine what driver you need.
@@ -1052,17 +1049,17 @@ sudo nano /boot/loader/entries/arch.conf
 ```
 Set kernel options to:
 ```
-options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.enable_guc=3 i915.enable_psr=2 acpi_osi=\"Windows 2015\" acpi_osi=! pcie_aspm=force pcie_aspm.policy=powersupersave drm.vblankoffdelay=1 elevator=noop splash quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3 nmi_watchdog=0
+options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2 acpi_osi=\"Windows 2015\" acpi_osi=! pcie_aspm=force pcie_aspm.policy=powersupersave drm.vblankoffdelay=1 nmi_watchdog=0 elevator=noop splash quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3
 ```
 
 #### INSTALL LATEST KERNEL
 ```shell
-sudo pacman -S --noconfirm linux
+sudo pacman -Sy linux
 ```
 
 #### INSTALL LATEST FIRMWARE
 ```shell
-sudo pacman -S linux-firmware
+sudo pacman -Sy intel-ucode linux-firmware
 ```
 
 #### ENABLE GUC, HUC AND PSR FOR i915
@@ -1071,7 +1068,7 @@ sudo nano /boot/loader/entries/arch.conf
 ```
 Add kernel options:
 ```shell
-i915.enable_guc=3 i915.enable_psr=2
+i915.enable_guc=3 i915.enable_psr=2 i915.enable_fbc=1 i915.enable_dc=2
 ```
 ```shell
 sudo systemctl reboot
@@ -1100,15 +1097,6 @@ Add kernel options:
 acpi_osi=\"Windows 2015\" acpi_osi=!
 ```
 
-#### TRICKING THE BIOS
-```shell
-sudo nano /boot/loader/entries/arch.conf
-```
-Add kernel options:
-```shell
-pcie_aspm=force pcie_aspm.policy=powersupersave drm.vblankoffdelay=1
-```
-
 #### ENABLE ASPM
 ```shell
 sudo nano /boot/loader/entries/arch.conf
@@ -1134,7 +1122,7 @@ drm.vblankoffdelay=1
 TLP is an advanced power management tool for Linux. It is a pure command line tool with automated background tasks and does not contain a GUI.
 
 ```shell
-sudo pacman -S --noconfirm tlp ethtool smartmontools x86_energy_perf_policy
+sudo pacman -S --noconfirm tlp tlp-rdw ethtool smartmontools x86_energy_perf_policy
 ```
 Disable powersaving for sound card to reduce background hiss/coil whine while using headphones.
 ```shell
@@ -1145,8 +1133,36 @@ Enable TLP Service on boot
 ```shell
 sudo systemctl enable tlp.service
 sudo systemctl enable tlp-sleep.service
+sudo systemctl enable NetworkManager-dispatcher.service
 sudo systemctl mask systemd-rfkill.service
 sudo systemctl mask systemd-rfkill.socket
+```
+
+#### DISABLE DEVICES TO SAVE POWER
+```shell
+sudo /bin/sh -c 'echo "#  Disable Bluetooth" >> /etc/modprobe.d/50-disable-bluetooth.conf'
+sudo /bin/sh -c 'echo "blacklist bluetooth" >> /etc/modprobe.d/50-disable-bluetooth.conf'
+sudo /bin/sh -c 'echo "blacklist btusb" >> /etc/modprobe.d/50-disable-bluetooth.conf'
+sudo /bin/sh -c 'echo "# Disable Webcam" >> /etc/modprobe.d/50-disable-webcam.conf'
+sudo /bin/sh -c 'echo "blacklist uvcvideo" >> /etc/modprobe.d/50-disable-webcam.conf'
+```
+The first two lines disable bluetooth and the last disables the webcam.
+
+#### DISABLE dGPU
+```shell
+sudo pacman -S --noconfirm dkms bbswitch-dkms
+sudo /bin/sh -c 'echo "# Disable Alternate Driver" >> /etc/modprobe.d/50-disable-dGPU.conf'
+sudo /bin/sh -c 'echo "blacklist nouveau" >> /etc/modprobe.d/50-disable-dGPU.conf'
+sudo /bin/sh -c 'echo "# Disable Original Driver" >> /etc/modprobe.d/50-disable-dGPU.conf'
+sudo /bin/sh -c 'echo "blacklist nvidia" >> /etc/modprobe.d/50-disable-dGPU.conf'
+sudo /bin/sh -c 'echo "blacklist nvidia_drm" >> /etc/modprobe.d/50-disable-dGPU.conf'
+sudo /bin/sh -c 'echo "# Switch off dGPU" >> /etc/modules'
+sudo /bin/sh -c 'echo "bbswitch load_state=0" >> /etc/modules'
+```
+
+#### CONFIGURE CRON JOBS FOR POWER SAVING
+```shell
+sudo pacman -S --noconfirm cronie
 ```
 
 #### POWERTOP
@@ -1159,11 +1175,11 @@ sudo nano /etc/systemd/system/powertop.service
 ```
 ```
 [Unit]
-Description=Powertop tunings
+Description=PowerTOP Tunings
 
 [Service]
-Type=oneshot
 ExecStart=/usr/bin/powertop --auto-tune
+RemainAfterExit=true
 
 [Install]
 WantedBy=multi-user.target
@@ -1171,13 +1187,6 @@ WantedBy=multi-user.target
 Save and enable it with:
 ```shell
 sudo systemctl --now enable powertop.service
-```
-Configure Tunables:
-```
-su - root
-Hit enter on Bad records on Tunables tab.
-Esc - exit powertop
-Exit root
 ```
 See power statistics using powertop
 ```shell
@@ -1197,17 +1206,6 @@ sudo pacman -S --noconfirm lm_sensors hddtemp
 sensors
 sudo hddtemp /dev/nvme0n1
 ```
-
-#### DISABLE WEBCAM/BLUETOOTH TO SAVE POWER
-
-This is optional. I didn’t bother to fix bluetooth quirks, as I don’t use it. So I disabled bluetooth to save power. The webcam service I disabled too, because there are no drivers at the moment anyway.
-```shell
-sudo /bin/sh -c 'echo "blacklist bluetooth" >> /etc/modprobe.d/50-disabling.conf'
-sudo /bin/sh -c 'echo "blacklist btusb" >> /etc/modprobe.d/50-disabling.conf'
-sudo /bin/sh -c 'echo "blacklist uvcvideo" >> /etc/modprobe.d/50-disabling.conf'
-```
-The first two lines disable bluetooth and the last disables the webcam service.
-
 
 #### CONFIGURE PERIODIC TRIM FOR SSD
 
@@ -1686,6 +1684,11 @@ sudo pacman -S --noconfirm gparted screenfetch dconf-editor bleachbit hdparm dst
 
 
 #### DEVELOPMENT
+
+#### GEANY
+```shell
+sudo pacman -S --noconfirm geany
+```
 
 #### ATOM
 ```shell
