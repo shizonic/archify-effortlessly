@@ -1779,14 +1779,14 @@ sudo pacman -S --noconfirm gparted screenfetch dconf-editor bleachbit hdparm dst
 
 #### DEVELOPMENT
 
-#### GEANY
-```sh
-sudo pacman -S --noconfirm geany
-```
-
 #### ATOM
 ```sh
 sudo pacman -S --noconfirm atom
+```
+
+#### GEANY
+```sh
+sudo pacman -S --noconfirm geany
 ```
 
 #### EMACS
