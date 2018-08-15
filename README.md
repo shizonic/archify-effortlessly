@@ -2239,8 +2239,8 @@ This manual refers to several articles and open source packages.
 
 ## RELATED
 
-[Git Create](https://github.com/shubhamgulati91/create-git-repos-from-cli) - Create Git Repos From Cli
-[Resume](https://github.com/shubhamgulati91/resume) - Resume in LaTeX using ModernCV
+- [Git Create](https://github.com/shubhamgulati91/create-git-repos-from-cli) - Create Git Repos From Cli
+- [Resume](https://github.com/shubhamgulati91/resume) - Resume in LaTeX using ModernCV
 
 ## SUPPORT
 
