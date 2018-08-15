@@ -3,16 +3,16 @@
   <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/shubhamgulati91/archify-effortlessly/master/arch-logo.png" alt="ArchLinux Logo" width="800"></a>
   <br>
   ARCHIFY EFFORT-LESSLY
+  <h4 align="center">
+  A comprehensive instrction manual to install <a href="https://www.archlinux.org" target="_blank">Arch Linux</a>.
+  <br>
+  Easy AF. Highly Detailed. Throughly Tested.
+  <br><br>
+  60 min read  •  Shubham Gulati
+  <br><br>
+  <a href="http://shubhamgulati91.github.io/archify-effortlessly" target="_blank">http://shubhamgulati91.github.io/archify-effortlessly
+  </h4>
 </h1>
-<h4 align="center">
-A comprehensive instrction manual to install <a href="https://www.archlinux.org" target="_blank">Arch Linux</a>.
-<br>
-Easy AF. Highly Detailed. Throughly Tested.
-<br>
-60 min read  •  Shubham Gulati
-<br>
-<a href="http://shubhamgulati91.github.io/archify-effortlessly" target="_blank">http://shubhamgulati91.github.io/archify-effortlessly
-</h4>
 
 <p align="center">
   <a href="https://www.paypal.me/shubhamgulati91">
