@@ -10,16 +10,16 @@
 </h1>
 
 <p align="center">
-  <a href="https://badge.fury.io/js/archify-effortlessly">
+  <a href="https://badge.fury.io/js/archify-effortlessly" target="_blank">
     <img src="https://badge.fury.io/js/archify-effortlessly.svg"
-         alt="Gitter">
+         alt="Gemfury">
   </a>
-  <a href="https://gitter.im/shubhamgulati91/archify-effortlessly"><img src="https://badges.gitter.im/shubhamgulati91/archify-effortlessly.png"></a>
-  <a href="https://saythanks.io/to/shubhamgulati91">
-      <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg">
+  <a href="https://gitter.im/shubhamgulati91/archify-effortlessly" target="_blank"><img src="https://badges.gitter.im/shubhamgulati91/archify-effortlessly.png" alt="Gitter"></a>
+  <a href="https://saythanks.io/to/shubhamgulati91" target="_blank">
+      <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg" alt="SayThanks">
   </a>
-  <a href="https://www.paypal.me/shubhamgulati91">
-    <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
+  <a href="https://www.paypal.me/shubhamgulati91" target="_blank">
+    <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat" alt="Paypal">
   </a>
 </p>
 
