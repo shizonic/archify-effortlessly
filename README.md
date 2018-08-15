@@ -5,7 +5,7 @@
   <h4 align="center">A comprehensive instruction manual to install <a href="https://www.archlinux.org" target="_blank">Arch Linux</a> effort-lessly.
   <br>Easy AF. Highly Detailed. Throughly Tested.
   <br><br>60 min read  •  Shubham Gulati
-  <br><br><a href="https://shubhamgulati91.github.io/archify-effortlessly" target="_blank">https://shubhamgulati91.github.io/archify-effortlessly
+  <br><br><a href="https://shubhamgulati91.github.io/archify-effortlessly" target="_blank">https://shubhamgulati91.github.io/archify-effortlessly</a>
   </h4>
 </h1>
 
