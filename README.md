@@ -10,6 +10,14 @@
 </h1>
 
 <p align="center">
+  <a href="https://badge.fury.io/js/archify-effortlessly">
+    <img src="https://badge.fury.io/js/archify-effortlessly.svg"
+         alt="Gitter">
+  </a>
+  <a href="https://gitter.im/shubhamgulati91/archify-effortlessly"><img src="https://badges.gitter.im/shubhamgulati91/archify-effortlessly"></a>
+  <a href="https://saythanks.io/to/shubhamgulati91">
+      <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg">
+  </a>
   <a href="https://www.paypal.me/shubhamgulati91">
     <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
   </a>
