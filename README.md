@@ -24,4 +24,6 @@
   <a href="#license">License</a>
 </p>
 
+<p align="center">
 ![screenshot](https://pbs.twimg.com/media/DjJGrjcUYAAv6JF.jpg:small)
+</p
