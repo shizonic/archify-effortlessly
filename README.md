@@ -25,5 +25,5 @@
 </p>
 
 <p align="center">
-![screenshot](https://pbs.twimg.com/media/DjJGrjcUYAAv6JF.jpg:small)
+><img src="https://pbs.twimg.com/media/DjJGrjcUYAAv6JF.jpg" alt="ArchLinux Screenshot" width="600">
 </p
