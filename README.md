@@ -26,7 +26,7 @@
 
 <p align="center">
 <img src="https://pbs.twimg.com/media/DjJGrjcUYAAv6JF.jpg" alt="ArchLinux Screenshot" width="600">
-</p>
+<br></p>
 
 ## KEY FEATURES
 
