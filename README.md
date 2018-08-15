@@ -14,7 +14,7 @@
     <img src="https://badge.fury.io/js/archify-effortlessly.svg"
          alt="Gitter">
   </a>
-  <a href="https://gitter.im/shubhamgulati91/archify-effortlessly"><img src="https://badges.gitter.im/shubhamgulati91/archify-effortlessly"></a>
+  <a href="https://gitter.im/shubhamgulati91/archify-effortlessly"><img src="https://badges.gitter.im/shubhamgulati91/archify-effortlessly.png"></a>
   <a href="https://saythanks.io/to/shubhamgulati91">
       <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg">
   </a>
