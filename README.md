@@ -19,9 +19,9 @@
   <a href="#key-features">KEY FEATURES</a> •
   <a href="#how-to-use">HOW TO USE</a> •
   <a href="#download">DOWNLOAD</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
+  <a href="#credits">CREDITS</a> •
+  <a href="#related">RELATED</a> •
+  <a href="#license">LICENSE</a>
 </p>
 
 <p align="center">
@@ -2226,7 +2226,7 @@ journalctl --vacuum-size=100M
 [https://github.com/shubhamgulati91/install-arch-linux-screenshots/tree/master/0-screenshots](https://github.com/shubhamgulati91/install-arch-linux-screenshots/tree/master/0-screenshots)
 
 
-## Credits
+## CREDITS
 
 This manual refers to several articles and open source packages.
 
@@ -2237,18 +2237,14 @@ This manual refers to several articles and open source packages.
 - [Archlinux Ultimate Install](https://github.com/helmuthdu/aui)
 - [Viper4Linux](https://github.com/L3vi47h4N/Viper4Linux)
 
-## Related
+## RELATED
 
 [Git Create](https://github.com/shubhamgulati91/create-git-repos-from-cli) - Create Git Repos From Cli
 [Resume](https://github.com/shubhamgulati91/resume) - Resume in LaTeX using ModernCV
 
-## Support
+## SUPPORT
 
-<a href="https://www.buymeacoffee.com/shubhamgulati" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
-<p>Or</p>
-
-<a href="https://www.patreon.com/shubhamgulati">
+<a href="https://www.buymeacoffee.com/shubhamgulati" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>  OR  <a href="https://www.patreon.com/shubhamgulati">
 	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
 </a>
 
@@ -2257,7 +2253,7 @@ This manual refers to several articles and open source packages.
 - [Git Create](https://github.com/shubhamgulati91/create-git-repos-from-cli) - Create Git Repos From Cli
 - [Resume](https://github.com/shubhamgulati91/resume) - Resume in LaTeX using ModernCV
 
-## License
+## LICENSE
 
 GPL-3.0
 
