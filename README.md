@@ -16,9 +16,9 @@
 </p>
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
+  <a href="#key-features">KEY FEATURES</a> •
+  <a href="#how-to-use">HOW TO USE</a> •
+  <a href="#download">DOWNLOAD</a> •
   <a href="#credits">Credits</a> •
   <a href="#related">Related</a> •
   <a href="#license">License</a>
@@ -28,7 +28,7 @@
 <img src="https://pbs.twimg.com/media/DjJGrjcUYAAv6JF.jpg" alt="ArchLinux Screenshot" width="600">
 </p>
 
-## Key Features
+## KEY FEATURES
 
 * Easy AF
   - Includes remote installation instructions.
@@ -42,22 +42,10 @@
   - Fully customized ZSH.
   - Power saving tunings.
 
-## How To Use
+## HOW TO USE
 
 To use this manual, you'll need [Git Bash](https://git-scm.com) and two computers.
-
-
-<img src="arch-logo.png" class="img-responsive" alt="">
-
-# INSTALL ARCH LINUX EFFORT-LESSLY
-
-[http://shubhamgulati91.github.io/install-arch-linux-effortlessly](http://shubhamgulati91.github.io/install-arch-linux-effortlessly)
-
-
-#### AUTHOR - SHUBHAM GULATI
-
-
-#### HARDWARE
+This manual is optimized especially for following hardware.
 ```
 ASUS Zenbook Pro UX501VW
 Intel® HM170 Chipset
@@ -70,9 +58,7 @@ NVIDIA® GeForce® GTX 960M with 4GB GDDR5 VRAM
 ```
 
 
-# PREPRATION
-
-#### DOWNLOAD ISO
+## DOWNLOAD
 
 [https://www.archlinux.org/download/](https://www.archlinux.org/download/)
 
@@ -2235,7 +2221,48 @@ journalctl --vacuum-size=100M
 
 ## THE END
 
-
 #### A little show-off at
 
 [https://github.com/shubhamgulati91/install-arch-linux-screenshots/tree/master/0-screenshots](https://github.com/shubhamgulati91/install-arch-linux-screenshots/tree/master/0-screenshots)
+
+
+## Credits
+
+This manual refers to several articles and open source packages.
+
+- [Arch Wiki - Installation Guide](https://wiki.archlinux.org/index.php/installation_guide)
+- [Arch Wiki - General Recommendations](https://wiki.archlinux.org/index.php/General_recommendations)
+- [Arch Wiki - Asus Zenbook Pro UX501](https://wiki.archlinux.org/index.php/ASUS_Zenbook_Pro_UX501)
+- [Arter97's Blog - Power Saving Tunings](http://arter97.blogspot.com/2018/08/saving-power-consumption-on-laptops.html)
+- [Archlinux Ultimate Install](https://github.com/helmuthdu/aui)
+- [Viper4Linux](https://github.com/L3vi47h4N/Viper4Linux)
+
+## Related
+
+[Git Create](https://github.com/shubhamgulati91/create-git-repos-from-cli) - Create Git Repos From Cli
+[Resume](https://github.com/shubhamgulati91/resume) - Resume in LaTeX using ModernCV
+
+## Support
+
+<a href="https://www.buymeacoffee.com/shubhamgulati" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+<p>Or</p>
+
+<a href="https://www.patreon.com/shubhamgulati">
+	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+</a>
+
+## You may also like...
+
+- [Git Create](https://github.com/shubhamgulati91/create-git-repos-from-cli) - Create Git Repos From Cli
+- [Resume](https://github.com/shubhamgulati91/resume) - Resume in LaTeX using ModernCV
+
+## License
+
+GPL-3.0
+
+---
+
+> [shubhamgulati.com](https://www.shubhamgulati.com) &nbsp;&middot;&nbsp;
+> GitHub [@shubhamgulati91](https://github.com/shubhamgulati91) &nbsp;&middot;&nbsp;
+> Twitter [@shubhamgulati91](https://twitter.com/shubhamgulati91)
