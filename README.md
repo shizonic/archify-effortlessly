@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/shubhamgulati91/archify-effortlessly/master/arch-logo.png" alt="ArchLinux Logo" width="800"></a>
+  <img src="https://raw.githubusercontent.com/shubhamgulati91/archify-effortlessly/master/arch-logo.png" alt="ArchLinux Logo" width="800">
   <br>ARCHIFY EFFORT-LESSLY
   <h4 align="center">A comprehensive instruction manual to install <a href="https://www.archlinux.org" target="_blank">Arch Linux</a> effort-lessly.
   <br>Easy AF. Highly Detailed. Throughly Tested.
