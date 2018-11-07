@@ -1822,6 +1822,11 @@ sudo pacman -S --noconfirm gparted screenfetch dconf-editor bleachbit hdparm dst
 
 #### DEVELOPMENT
 
+#### VISUAL CODE STUDIO
+```sh
+sudo pacman -S --noconfirm code
+```
+
 #### ATOM
 ```sh
 sudo pacman -S --noconfirm atom
