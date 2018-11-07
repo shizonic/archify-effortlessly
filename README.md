@@ -760,7 +760,7 @@ sudo timedatectl set-ntp true
 Xorg is the public, open-source implementation of the X window system version 11.
 
 ```sh
-sudo pacman -S xorg-server xorg-server-utils xorg-xbacklight xbindkeys xorg-xinit xorg-xinput xorg-twm xorg-xclock xterm xdotool
+sudo pacman -S xorg-server xorg-xbacklight xbindkeys xorg-xinit xorg-xinput xorg-twm xorg-xclock xterm xdotool
 
 ```
 
@@ -841,14 +841,14 @@ sudo pacman -S xf86-video-nonveau mesa libva-vdpau-driver lib32-mesa lib32-libva
 sudo pacman -S nvidia nvidia-libgl lib32-nvidia-libgl
 ```
 
-#### INTEL CARDS
+#### [NOT REQUIRED] INTEL CARDS
 
 Open Source GPU Drivers:
 ```sh
 sudo pacman -S xf86-video-intel mesa libva-intel-driver lib32-mesa lib32-libva-intel-driver
 ```
 
-#### ATI CARDS
+#### [NOT REQUIRED] ATI CARDS
 
 Open Source GPU Drivers:
 ```sh
@@ -859,7 +859,7 @@ Proprietary GPU Drivers (available only on AUR at the time of writing):
 sudo aurman -S catalyst catalyst-libgl lib32-catalyst-libgl
 ```
 
-#### ADDITIONAL FIRMWARE
+#### [RECOMMENDED] ADDITIONAL FIRMWARE
 ```sh
 aurman -S --noconfirm --noedit wd719x-firmware aic94xx-firmware
 sudo mkinitcpio -p linux
@@ -872,7 +872,7 @@ sudo mkinitcpio -p linux
 
 Install GNOME Desktop environment with:
 ```sh
-sudo pacman -S --noconfirm gnome gnome-extra gnome-software gnome-initial-setup
+sudo pacman -S gnome gnome-extra gnome-software gnome-initial-setup
 sudo pacman -S --noconfirm gnome-menus deja-dup gedit-plugins gpaste gnome-tweak-tool gnome-power-manager gnome-themes-standard fprintd nautilus-share
 ```
 
@@ -910,6 +910,13 @@ sudo systemctl disable dhcpcd.service
 ```
 ```sh
 sudo systemctl enable NetworkManager.service
+```
+
+#### INSTALL BROWSER BEFORE REBOOTING
+
+Install Web Browser:
+```sh
+sudo pacman -S --noconfirm chromium firefox
 ```
 
 ## REBOOT
@@ -1113,7 +1120,7 @@ sudo pacman -Sy linux
 sudo pacman -Sy intel-ucode linux-firmware
 ```
 
-#### CONFIGURE i915
+#### [EXPERIMENTAL] CONFIGURE i915
 ```sh
 sudo nano /boot/loader/entries/arch.conf
 ```
@@ -1144,7 +1151,7 @@ i915 0000:00:02.0: HuC enabled
 Setting dangerous option enable_psr - tainting kernel
 ```
 
-#### ADJUSTING DRM VBLANK OFF DELAY
+#### [EXPERIMENTAL] ADJUSTING DRM VBLANK OFF DELAY
 ```sh
 sudo nano /boot/loader/entries/arch.conf
 ```
@@ -1153,7 +1160,7 @@ Add kernel options:
 drm.vblankoffdelay=1
 ```
 
-#### TRICKING THE BIOS
+#### [EXPERIMENTAL] TRICKING THE BIOS
 
 ```sh
 sudo nano /boot/loader/entries/arch.conf
@@ -1163,7 +1170,7 @@ Add kernel options:
 acpi_osi=! acpi_osi="Windows 2015" acpi_backlight=native
 ```
 
-#### ENABLE ASPM
+#### [EXPERIMENTAL] ENABLE ASPM
 ```sh
 sudo nano /boot/loader/entries/arch.conf
 ```
@@ -1194,7 +1201,7 @@ sudo systemctl mask systemd-rfkill.service
 sudo systemctl mask systemd-rfkill.socket
 ```
 
-#### REMOVE DEVICES AT BOOT AND RESUME
+#### [EXPERIMENTAL] REMOVE DEVICES AT BOOT AND RESUME
 
 Type 'lsusb' and 'lsusb -v' to see USB devices.
 ```sh
@@ -1266,7 +1273,7 @@ You can validate whether it works by checking kernel log with dmesg:
 [10838.454298] usb 1-6: USB disconnect, device number 3
 ```
 
-#### DISABLE UNUSED PCIe PERIPHERALS
+#### [EXPERIMENTAL] DISABLE UNUSED PCIe PERIPHERALS
 ```sh
 sudo lspci | grep -v 00:
 ```
@@ -1286,7 +1293,7 @@ sudo /bin/sh -c 'echo "blacklist uvcvideo" >> /etc/modprobe.d/50-disable-webcam.
 ```
 The first two lines disable bluetooth and the last disables the webcam.
 
-#### DISABLE dGPU
+#### [EXPERIMENTAL] DISABLE dGPU
 ```sh
 sudo pacman -S --noconfirm dkms bbswitch
 sudo /bin/sh -c 'echo "# Disable Alternate Driver" >> /etc/modprobe.d/50-disable-dGPU.conf'
