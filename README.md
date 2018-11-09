@@ -186,7 +186,6 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@192.168.0.x
 For convenience, localectl can be used to set console keymap. It will change the KEYMAP variable in /etc/vconsole.conf and also set the keymap for current session:
 ```sh
 localectl --no-convert set-keymap us
-localectl --no-convert set-x11-keymap us
 echo
 localectl status
 ```
@@ -231,12 +230,6 @@ Number  Start    End      Size     File system     Name  Flags
 #### CREATE, FORMAT AND MOUNT NEW PARTITIONS
 
 As soon as you know the alias of your hard drive, use "GNUParted" partitioning tool to create new partitions:
-```sh
-umount -R /mnt /mnt/boot /mnt/home
-swapoff -a
-rm -rf /mnt/boot
-rm -rf /mnt/home
-```
 ```sh
 wipefs -af /dev/nvme0n1
 parted --script -a optimal /dev/nvme0n1 \
@@ -299,25 +292,6 @@ reflector --country 'India' -f 20 -l 20 -n 20 --verbose --sort rate --save /etc/
 chmod +r /etc/pacman.d/mirrorlist
 ```
 
-The following is a brief summary of what these flags in the above command do.
-```
-–-verbose : Print extra information
-–-country <name> : Match one of the given countries
--f <n> : Return the <n> fastest mirrors that meet the other criteria
-–l <n> : Limit the list to <n> most recently synchronized servers
--n <n> : Return atmost <n> mirrors
-–-sort rate – Sort the mirror list by download rate
-–-save – Save the mirror list to the given path
-```
-Alternatively, to filter 50 most recently synchronized HTTP servers sorted by download rate, run the following command:
-```sh
-sudo reflector --verbose -l 50 -p http --sort rate --save /etc/pacman.d/mirrorlist
-```
-Alternatively, to get all country-sorted list run the following command:
-```sh
-sudo curl -o /etc/pacman.d/mirrorlist https://www.archlinux.org/mirrorlist/all/
-```
-
 
 ## INSTALL BASE SYSTEM
 
@@ -358,13 +332,8 @@ export LANG=en_US.UTF-8
 
 #### CONFIGURE TIMEZONE
 
-Select a time zone
-```sh
-tzselect
-```
-For example, I choose the zone (4. Asia) and subzone (14. India) and confirm with 1.
-
-Link the preferred time zone to your localtime. For example:
+Link the preferred time zone to your localtime.
+For example, I get the list of zones with 'tzselect' and choose Asia/Kolkata.
 ```sh
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 ```
@@ -606,27 +575,12 @@ git clone https://github.com/helmuthdu/dotfiles
 cp -v dotfiles/.bashrc dotfiles/.dircolors dotfiles/.dircolors_256 /home/shubham/
 rm -rf dotfiles && cd ~
 ```
-```sh
-[ERRONEOUS] cp -v dotfiles/.nanorc
-```
-
-#### [ERRONEOUS] CONFIGURE VIM
-```sh
-sudo pacman -S --noconfirm vim
-git clone https://github.com/helmuthdu/vim /home/shubham/.vim
-ln -sfv /home/shubham/.vim/vimrc /home/shubham/.vimrc
-cp -Rv /home/shubham/.vim/fonts /home/shubham/.fonts
-```
 
 #### GIT
 ```sh
 sudo pacman -S --noconfirm git
 git config --global user.name "Shubham Gulati" && git config --global user.email "shubhamgulati91@gmail.com"
 git config --global credential.helper cache store
-```
-Or, else:
-```sh
-git config --global credential.helper cache && git config --global credential.helper 'cache --timeout=86400'
 ```
 
 #### SSH
@@ -691,7 +645,7 @@ rm -rf /tmp/aurman_install
 
 [https://wiki.archlinux.org/index.php/Bash](https://wiki.archlinux.org/index.php/Bash)
 ```sh
-sudo pacman -S --noconfirm bc rsync mlocate bash-completion pkgstats arch-wiki-lite
+sudo pacman -S --noconfirm bc rsync mlocate bash-completion pkgstats
 ```
 
 #### (UN)COMPRESS TOOLS
@@ -869,8 +823,7 @@ sudo mkinitcpio -p linux
 
 Install GNOME Desktop environment with:
 ```sh
-sudo pacman -S gnome gnome-extra gnome-software gnome-initial-setup
-sudo pacman -S --noconfirm gnome-menus deja-dup gedit-plugins gpaste gnome-tweak-tool gnome-power-manager gnome-themes-standard fprintd nautilus-share
+sudo pacman -S --noconfirm gnome gnome-extra gnome-software gnome-initial-setup gnome-menus deja-dup gedit-plugins gpaste gnome-tweak-tool gnome-power-manager gnome-themes-standard fprintd nautilus-share
 ```
 
 #### CONFIGURE XINITRC
