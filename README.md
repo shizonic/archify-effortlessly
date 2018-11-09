@@ -294,19 +294,8 @@ To download data from the fastest mirrors:
 To install Reflector:
 ```sh
 pacman -Sy --noconfirm reflector rsync curl python
-```
-Before running Reflector, you must backup your default mirrorlist file. Because, Reflector will overwrite it.
-
-To backup the current mirrorlist, run:
-```sh
 cp -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-```
-Now, let us start to retrieve top five mirrors of India according to the download rate, and save them to the mirrorlist file.
-```sh
 reflector --country 'India' -f 20 -l 20 -n 20 --verbose --sort rate --save /etc/pacman.d/mirrorlist
-```
-Allow global read access (required for non-root AUR execution)
-```sh
 chmod +r /etc/pacman.d/mirrorlist
 ```
 
@@ -489,7 +478,15 @@ Now we will create the Arch Linux boot entry:
 ```sh
 nano /boot/loader/entries/arch.conf
 ```
-Enter the following configuration to the "arch.conf" file.
+[STABLE] Enter the following configuration to the "arch.conf" file.
+```
+title		Arch Linux
+linux		/vmlinuz-linux
+initrd		/intel-ucode.img
+initrd		/initramfs-linux.img
+options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.preliminary_hw_support=1 intel_idle.max_cstate=1 i915.enable_execlists=0 acpi_osi= acpi_backlight=native elevator=noop splash quiet vga=current loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3 nmi_watchdog=0
+```
+[EXPERIMENTAL] Enter the following configuration to the "arch.conf" file.
 ```
 title		Arch Linux
 linux		/vmlinuz-linux
@@ -605,7 +602,7 @@ Inject pre-configured dotfiles:
 ```sh
 sudo pacman -S --noconfirm git colordiff
 mkdir -p /tmp && cd /tmp
-git clone https://github.com/shubhamgulati91/dotfiles
+git clone https://github.com/helmuthdu/dotfiles
 cp -v dotfiles/.bashrc dotfiles/.dircolors dotfiles/.dircolors_256 /home/shubham/
 rm -rf dotfiles && cd ~
 ```
@@ -616,7 +613,7 @@ rm -rf dotfiles && cd ~
 #### [ERRONEOUS] CONFIGURE VIM
 ```sh
 sudo pacman -S --noconfirm vim
-git clone https://github.com/shubhamgulati91/vim /home/shubham/.vim
+git clone https://github.com/helmuthdu/vim /home/shubham/.vim
 ln -sfv /home/shubham/.vim/vimrc /home/shubham/.vimrc
 cp -Rv /home/shubham/.vim/fonts /home/shubham/.fonts
 ```
