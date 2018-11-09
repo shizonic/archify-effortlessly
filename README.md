@@ -957,7 +957,7 @@ Add following code to fonts.conf
 ```
 In order to enable “Infinality mode” in plain vanilla freetype2:
 ```sh
-sed -i '/^#export FREETYPE_PROPERTIES=.*/s/^#//' /etc/profile.d/freetype2.sh
+sudo sed -i '/^#export FREETYPE_PROPERTIES=.*/s/^#//' /etc/profile.d/freetype2.sh
 ```
 Then create the following symbolic links in /etc/fonts/conf.d if they aren’t already present:
 ```sh
