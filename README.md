@@ -1831,11 +1831,11 @@ archlinux-java status
 ```
 Change the default Java environment
 ```sh
-archlinux-java set java_environment_name
+sudo archlinux-java set java_environment_name
 ```
 Unset the default Java environment
 ```sh
-archlinux-java unset
+sudo archlinux-java unset
 ```
 
 #### SPRING TOOL SUITE
