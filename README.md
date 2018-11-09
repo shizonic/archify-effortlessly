@@ -907,23 +907,17 @@ Ctrl+Alt+T
 ```
 
 
-#### CONFIGURE FONTS
+#### INSTALL FONTS AND THEMES
 
 Install better system fonts:
 ```sh
 sudo pacman -S --noconfirm ttf-ubuntu-font-family noto-fonts ttf-liberation adobe-source-code-pro-fonts ttf-dejavu opendesktop-fonts
 ```
-Open Gnome Tweak Tool, goto fonts tab and change the following options:
+Install Shell & Icon Themes
+```sh
+aurman -S --noconfirm --noedit macos-arc-white-theme macos-icon-theme
+sudo pacman -S --noconfirm arc-gtk-theme
 ```
-Window Titles   	to		Ubuntu Bold			10
-Interface		to		Ubuntu Regular			10
-Documents       	to		Ubuntu Regular			10
-Monospace		to		Ubuntu Mono Regular		10
-Hinting			to		Slight
-Antialiasing		to		Rgba
-Sacling Factor		to		1.00
-```
-
 Add font configuration to "~/.config/fontconfig/fonts.conf"
 ```sh
 mkdir -p ~/.config/fontconfig/
@@ -974,16 +968,8 @@ sudo ln -s ../conf.avail/11-lcdfilter-default.conf
 cd ~
 ```
 
+#### CHANGE LOOK AND FEEL
 
-#### CONFIGURE THEMES
-
-#### GNOME SHELL THEMES
-
-Install Shell & Icon Themes
-```sh
-aurman -S --noconfirm --noedit macos-arc-white-theme macos-icon-theme
-sudo pacman -S --noconfirm arc-gtk-theme
-```
 Enable User themes Extension and configure appreance from GNOME Tweak Tool:
 ```
 Applications		to		MacOS-Arc-White
@@ -991,6 +977,16 @@ Cursor			to		Adwaita (default)
 Icons			to		MacOS
 Shell			to		Arc
 Animations	        to		Enabled
+```
+Open Gnome Tweak Tool, goto fonts tab and change the following options:
+```
+Window Titles   	to		Ubuntu Bold			10
+Interface		to		Ubuntu Regular			10
+Documents       	to		Ubuntu Regular			10
+Monospace		to		Ubuntu Mono Regular		10
+Hinting			to		Slight
+Antialiasing		to		Rgba
+Sacling Factor		to		1.00
 ```
 
 
