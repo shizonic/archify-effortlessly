@@ -862,12 +862,6 @@ sudo systemctl disable dhcpcd.service
 sudo systemctl enable NetworkManager.service
 ```
 
-#### INSTALL BROWSER BEFORE REBOOTING
-
-Install Web Browser:
-```sh
-sudo pacman -S --noconfirm chromium firefox
-```
 
 ## REBOOT
 
