@@ -297,7 +297,7 @@ chmod +r /etc/pacman.d/mirrorlist
 
 The following command installs all packages contained in the "base" and "base-devel" package-group of the Arch Linux installer.
 ```sh
-pacstrap /mnt base base-devel intel-ucode zsh openssh git bash-completion reflector python
+pacstrap /mnt base base-devel intel-ucode zsh openssh git bash-completion reflector python pacman-contrib
 ```
 
 
@@ -1392,6 +1392,14 @@ sudo systemctl enable --now accounts-daemon
 sudo /bin/sh -c 'echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.d/99-sysctl.conf'
 ```
 
+#### INSTALL PACKAGE CLEANER
+```sh
+sudo pacman -S pacman-contrib
+```
+```sh
+sudo systemctl enable --now paccache.timer
+```
+
 
 ## LEARN BASICS OF PACKAGE INSTALLERS
 
@@ -2007,18 +2015,18 @@ echo -e '\n# Adminer Configuration\nInclude conf/extra/httpd-adminer.conf' >> /e
 #### MARIA-DB
 ```sh
 sudo pacman -S --noconfirm mariadb
-/usr/bin/mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+sudo /usr/bin/mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 sudo systemctl enable --now mysqld.service
-/usr/bin/mysql_secure_installation
+sudo /usr/bin/mysql_secure_installation
 ```
 
 #### POSTGRESQL
 ```sh
 sudo pacman -S --noconfirm postgresql
-mkdir -p /var/lib/postgres
-chown -R postgres:postgres /var/lib/postgres
+sudo mkdir -p /var/lib/postgres
+sudo chown -R postgres:postgres /var/lib/postgres
 systemd-tmpfiles --create postgresql.conf
-passwd postgres
+sudo passwd postgres
 su - postgres -c "initdb --locale ${LOCALE}.UTF-8 -D /var/lib/postgres/data"
 sudo systemctl enable --now postgresql.service
 sudo pacman -S --noconfirm postgis
