@@ -760,13 +760,9 @@ For the system I'm using to generate this guide, I use NVIDIA driver. You can us
 ```sh
 sudo mkinitcpio -p linux
 ```
-
-###### [RECOMMENDED] BUMBLEBEE (NVIDIA)
+###### [STABLE] BUMBLEBEE (NVIDIA)
 ```sh
-sudo pacman -S --needed bumblebee bbswitch mesa xf86-video-intel nvidia lib32-virtualgl lib32-nvidia-utils lib32-mesa-libgl
-```
-```
-extras: nvidia-settings lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
+sudo pacman -S --needed xf86-video-intel bumblebee nvidia nvidia-settings lib32-virtualgl lib32-nvidia-utils mesa lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
 ```
 ```
 NOTE: Pick nvidia-utils if conflict.
@@ -780,6 +776,13 @@ sudo gpasswd -a shubham bumblebee
 Enable bumblebee service:
 ```sh
 sudo systemctl enable bumblebeed.service
+```
+###### [EXPERIMENTAL] BUMBLEBEE (NVIDIA)
+```sh
+sudo pacman -S --needed bumblebee bbswitch mesa xf86-video-intel nvidia lib32-virtualgl lib32-nvidia-utils lib32-mesa-libgl
+```
+```
+extras: nvidia-settings lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
 ```
 
 ###### [NOT RECOMMENDED] OTHER OPEN SOURCE DRIVERS
