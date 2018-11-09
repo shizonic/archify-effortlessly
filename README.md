@@ -447,15 +447,7 @@ Now we will create the Arch Linux boot entry:
 ```sh
 nano /boot/loader/entries/arch.conf
 ```
-[STABLE] Enter the following configuration to the "arch.conf" file.
-```
-title		Arch Linux
-linux		/vmlinuz-linux
-initrd		/intel-ucode.img
-initrd		/initramfs-linux.img
-options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.preliminary_hw_support=1 intel_idle.max_cstate=1 i915.enable_execlists=0 acpi_osi= acpi_backlight=native elevator=noop splash quiet vga=current loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3 nmi_watchdog=0
-```
-[EXPERIMENTAL] Enter the following configuration to the "arch.conf" file.
+[ADVANCED POWER SAVINGS] Enter the following configuration to the "arch.conf" file.
 ```
 title		Arch Linux
 linux		/vmlinuz-linux
@@ -475,6 +467,14 @@ console-mode	keep
 auto-entries	1
 auto-firmware   1
 default		arch
+```
+[ALTERNATE LEGACY CONFIG] Enter the following configuration to the "arch.conf" file.
+```
+title		Arch Linux
+linux		/vmlinuz-linux
+initrd		/intel-ucode.img
+initrd		/initramfs-linux.img
+options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.preliminary_hw_support=1 intel_idle.max_cstate=1 i915.enable_execlists=0 acpi_osi= acpi_backlight=native elevator=noop splash quiet vga=current loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3 nmi_watchdog=0
 ```
 
 
@@ -545,12 +545,6 @@ Use bash shell to SSH to your installation disk from another computer and contin
 ```sh
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null shubham@192.168.0.xxx
 ```
-If you are unable to login from remote, check that "PermitRootLogin yes" is present (and uncommented) in:
-```sh
-/etc/ssh/sshd_config
-```
-This setting allows root login with password authentication on the SSH server.
-
 
 #### CONFIGURE ZSH
 
@@ -663,8 +657,6 @@ Avahi is a free Zero Configuration Networking (Zeroconf) implementation, includi
 
 ```sh
 sudo pacman -S --noconfirm avahi nss-mdns
-```
-```sh
 sudo systemctl enable avahi-daemon.service
 ```
 
@@ -756,11 +748,7 @@ For the system I'm using to generate this guide, I use NVIDIA driver. You can us
 
 #### NVIDIA CARDS
 
-###### CREATE RAMDISK
-```sh
-sudo mkinitcpio -p linux
-```
-###### [STABLE] BUMBLEBEE (NVIDIA)
+###### [REQUIRED] BUMBLEBEE (NVIDIA)
 ```sh
 sudo pacman -S --needed xf86-video-intel bumblebee nvidia nvidia-settings lib32-virtualgl lib32-nvidia-utils mesa lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
 ```
@@ -776,13 +764,6 @@ sudo gpasswd -a shubham bumblebee
 Enable bumblebee service:
 ```sh
 sudo systemctl enable bumblebeed.service
-```
-###### [EXPERIMENTAL] BUMBLEBEE (NVIDIA)
-```sh
-sudo pacman -S --needed bumblebee bbswitch mesa xf86-video-intel nvidia lib32-virtualgl lib32-nvidia-utils lib32-mesa-libgl
-```
-```
-extras: nvidia-settings lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
 ```
 
 ###### [NOT RECOMMENDED] OTHER OPEN SOURCE DRIVERS
@@ -869,6 +850,10 @@ sudo systemctl enable NetworkManager.service
 ## REBOOT
 
 We are now finally ready to boot in to the glory that Arch Linux is.
+But before rebooting, install Web Browser to get access to the installation manual out of the box:
+```sh
+sudo pacman -S --noconfirm chromium firefox
+```
 ```sh
 sudo systemctl reboot
 ```
