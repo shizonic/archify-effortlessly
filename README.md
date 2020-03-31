@@ -297,7 +297,7 @@ chmod +r /etc/pacman.d/mirrorlist
 
 The following command installs all packages contained in the "base" and "base-devel" package-group of the Arch Linux installer.
 ```sh
-pacstrap /mnt base base-devel intel-ucode zsh openssh git bash-completion reflector python pacman-contrib
+pacstrap /mnt base base-devel intel-ucode zsh openssh git bash-completion reflector python pacman-contrib nano
 ```
 
 
@@ -466,8 +466,9 @@ editor		yes
 console-mode	keep
 auto-entries	1
 auto-firmware   1
-default		arch
+default		xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-*
 ```
+
 [ALTERNATE LEGACY CONFIG] Enter the following configuration to the "arch.conf" file.
 ```
 title		Arch Linux
@@ -487,7 +488,8 @@ At this point, you have network access from the live CD, but you will need to se
 
 To start using Wi-Fi, first you will need to install a few packages.
 ```sh
-pacman -S --noconfirm dialog networkmanager iw wpa_actiond wireless_tools wpa_supplicant dhclient
+pacman -S --noconfirm dialog networkmanager iw wireless_tools wpa_supplicant dhclient
+#todo wpa_actiond
 ```
 
 #### UNMOUNT PARTITIONS
@@ -514,6 +516,42 @@ As soon as you turn-on the system to avoid booting into 4k resolution mode, edit
 ```
 nomodeset [...]
 ```
+If something goes wrong at this point, use the installation media to remount partitions and chroot into the installed system.
+```
+wifi-menu -o
+```
+```
+passwd
+```
+```
+systemctl start sshd.service
+```
+```
+ip a
+```
+```
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@192.168.0.xxx
+```
+```
+mount -t ext4 /dev/nvme0n1p2 /mnt
+mount -t vfat /dev/nvme0n1p1 /mnt/boot
+mount -t ext4 /dev/nvme0n1p4 /mnt/home
+```
+```
+lsblk /dev/nvme0n1
+```
+```
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+nvme0n1     259:0    0  477G  0 disk
+├─nvme0n1p1 259:1    0    1G  0 part /mnt/boot
+├─nvme0n1p2 259:2    0   80G  0 part /mnt
+├─nvme0n1p3 259:3    0   24G  0 part [SWAP]
+└─nvme0n1p4 259:4    0  372G  0 part /mnt/home
+```
+```
+arch-chroot /mnt /bin/bash
+```
+
 
 #### LOGIN TO NEW USER
 
