@@ -146,7 +146,7 @@ The installation image automatically enables the dhcpcd daemon on boot for wired
 
 Now let’s ping Google to see if we are connected:
 ```sh
-ping -c 3 www.google.com
+ping -c 3 google.com
 ```
 If you can see the ping, it’s time to proceed.
 
@@ -287,10 +287,12 @@ To download data from the fastest mirrors:
 To install Reflector:
 ```sh
 pacman -Sy --noconfirm reflector
-#todo  rsync curl python
 cp -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 reflector --country 'India' -f 20 -l 20 -n 20 --verbose --sort rate --save /etc/pacman.d/mirrorlist
 chmod +r /etc/pacman.d/mirrorlist
+```
+```sh
+todo rsync curl python
 ```
 
 
@@ -298,8 +300,10 @@ chmod +r /etc/pacman.d/mirrorlist
 
 The following command installs all packages contained in the "base" and "base-devel" package-group of the Arch Linux installer.
 ```sh
-pacstrap /mnt base base-devel linux linux-firmware intel-ucode zsh openssh git bash-completion reflector pacman-contrib nano
-#todo python
+pacstrap /mnt base base-devel linux linux-firmware intel-ucode nano vim zsh openssh git bash-completion reflector pacman-contrib
+```
+```sh
+todo python
 ```
 
 
@@ -337,7 +341,7 @@ export LANG=en_US.UTF-8
 Link the preferred time zone to your localtime.
 For example, I get the list of zones with 'tzselect' and choose Asia/Kolkata.
 ```sh
-ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+timedatectl set-timezone Asia/Kolkata
 ```
 Configure systemd-timesyncd:
 ```sh
@@ -479,6 +483,9 @@ initrd		/intel-ucode.img
 initrd		/initramfs-linux.img
 options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.preliminary_hw_support=1 intel_idle.max_cstate=1 i915.enable_execlists=0 acpi_osi= acpi_backlight=native elevator=noop splash quiet vga=current loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3 nmi_watchdog=0
 ```
+```
+todo JUMP TO INSTALL DESKTOP ENV
+```
 
 
 #### CONFIGURE NETWORK
@@ -491,7 +498,6 @@ At this point, you have network access from the live CD, but you will need to se
 To start using Wi-Fi, first you will need to install a few packages.
 ```sh
 pacman -S --noconfirm dialog networkmanager iw wireless_tools wpa_supplicant dhclient
-#todo wpa_actiond
 ```
 
 #### UNMOUNT PARTITIONS
@@ -566,8 +572,22 @@ shubham's password
 ```
 
 
+
+#### SETUP ZSH
+
+Skip/Setup zsh defaults
+
+
+
 #### CONNECT TO INTERNET
 ```sh
+sudo pacman -S networkmanager
+sudo systemctl enable --now NetworkManager.service
+```
+```
+nmcli device wifi connect "SSID" password "password"
+```
+```
 sudo wifi-menu
 ```
 
