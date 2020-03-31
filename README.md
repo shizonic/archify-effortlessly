@@ -291,19 +291,13 @@ cp -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 reflector --country 'India' -f 20 -l 20 -n 20 --verbose --sort rate --save /etc/pacman.d/mirrorlist
 chmod +r /etc/pacman.d/mirrorlist
 ```
-```sh
-todo rsync curl python
-```
 
 
 ## INSTALL BASE SYSTEM
 
 The following command installs all packages contained in the "base" and "base-devel" package-group of the Arch Linux installer.
 ```sh
-pacstrap /mnt base base-devel linux linux-firmware intel-ucode nano vim zsh openssh git bash-completion reflector pacman-contrib
-```
-```sh
-todo python
+pacstrap /mnt base base-devel linux linux-firmware intel-ucode nano zsh bash-completion reflector pacman-contrib
 ```
 
 
@@ -472,7 +466,7 @@ editor		yes
 console-mode	keep
 auto-entries	1
 auto-firmware   1
-default		xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-*
+default		arch
 ```
 
 [ALTERNATE LEGACY CONFIG] Enter the following configuration to the "arch.conf" file.
@@ -483,22 +477,51 @@ initrd		/intel-ucode.img
 initrd		/initramfs-linux.img
 options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.preliminary_hw_support=1 intel_idle.max_cstate=1 i915.enable_execlists=0 acpi_osi= acpi_backlight=native elevator=noop splash quiet vga=current loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3 nmi_watchdog=0
 ```
-```
-todo JUMP TO INSTALL DESKTOP ENV
+
+
+
+## INSTALL DESKTOP ENVIRONMENT
+
+#### DESKTOP ENVIRONMENT
+
+Install GNOME Desktop environment with:
+```sh
+pacman -S --noconfirm gnome gnome-extra gnome-software gnome-initial-setup gnome-menus deja-dup gedit-plugins gpaste gnome-tweak-tool gnome-power-manager gnome-themes-standard fprintd nautilus-share
 ```
 
+#### GNOME DISPLAY MANAGER
+
+Enable GDM:
+```sh
+systemctl enable gdm.service
+```
 
 #### CONFIGURE NETWORK
 
-At this point, you have network access from the live CD, but you will need to set up your network for the actual Arch installation after rebooting.
+#### NETWORKMANAGER
 
+[https://wiki.archlinux.org/index.php/Networkmanager](https://wiki.archlinux.org/index.php/Networkmanager)
 
-#### CONFIGURE WIRELESS NETWORK
-
-To start using Wi-Fi, first you will need to install a few packages.
+NetworkManager is a program for providing detection and configuration for systems to automatically connect to network. NetworkManager's functionality can be useful for both wireless and wired networks.
 ```sh
-pacman -S --noconfirm dialog networkmanager iw wireless_tools wpa_supplicant dhclient
+pacman -S --noconfirm dnsmasq networkmanager-openconnect networkmanager-openvpn networkmanager-pptp networkmanager-vpnc network-manager-applet nm-connection-editor gnome-keyring
 ```
+```sh
+systemctl disable dhcpcd.service
+```
+```sh
+systemctl enable NetworkManager.service
+```
+
+
+## REBOOT
+
+We are now finally ready to boot in to the glory that Arch Linux is.
+But before rebooting, install Web Browser to get access to the installation manual out of the box:
+```sh
+sudo pacman -S --noconfirm chromium firefox
+```
+
 
 #### UNMOUNT PARTITIONS
 
@@ -562,48 +585,19 @@ arch-chroot /mnt /bin/bash
 
 
 #### LOGIN TO NEW USER
-
 You can log into your new installation as root or with newly created user, using the password you specified with passwd.
-```
-shubham
-```
-```
-shubham's password
-```
 
 
-
-#### SETUP ZSH
-
-Skip/Setup zsh defaults
-
-
-
-#### CONNECT TO INTERNET
+#### CONFIGURE XINITRC
 ```sh
-sudo pacman -S networkmanager
-sudo systemctl enable --now NetworkManager.service
-```
-```
-nmcli device wifi connect "SSID" password "password"
-```
-```
-sudo wifi-menu
-```
-
-#### [HIGHLY RECOMMENDED] CONTINUE INSTALLATION REMOTELY
-
-Start the openssh daemon using:
-```sh
-sudo systemctl enable --now sshd.service
-```
-Figure out your IP using:
-```sh
-ip a
-```
-Use bash shell to SSH to your installation disk from another computer and continue the installation as usual.
-```sh
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null shubham@192.168.0.xxx
+cp -fv /etc/X11/xinit/xinitrc /home/shubham/.xinitrc
+sed -i '/^twm.*/s/^/# /' /home/shubham/.xinitrc
+sed -i '/^xclock.*/s/^/# /' /home/shubham/.xinitrc
+sed -i '/^xterm.*/s/^/# /' /home/shubham/.xinitrc
+sed -i '/^exec.*/s/^/# /' /home/shubham/.xinitrc
+echo -e "" >> /home/shubham/.xinitrc
+echo -e "exec gnome-session" >> /home/shubham/.xinitrc
+sudo chmod +x ~/.xinitrc
 ```
 
 #### CONFIGURE ZSH
@@ -861,62 +855,7 @@ sudo mkinitcpio -p linux
 ```
 
 
-## INSTALL DESKTOP ENVIRONMENT
 
-#### DESKTOP ENVIRONMENT
-
-Install GNOME Desktop environment with:
-```sh
-sudo pacman -S --noconfirm gnome gnome-extra gnome-software gnome-initial-setup gnome-menus deja-dup gedit-plugins gpaste gnome-tweak-tool gnome-power-manager gnome-themes-standard fprintd nautilus-share
-```
-
-#### CONFIGURE XINITRC
-```sh
-cp -fv /etc/X11/xinit/xinitrc /home/shubham/.xinitrc
-sed -i '/^twm.*/s/^/# /' /home/shubham/.xinitrc
-sed -i '/^xclock.*/s/^/# /' /home/shubham/.xinitrc
-sed -i '/^xterm.*/s/^/# /' /home/shubham/.xinitrc
-sed -i '/^exec.*/s/^/# /' /home/shubham/.xinitrc
-echo -e "" >> /home/shubham/.xinitrc
-echo -e "exec gnome-session" >> /home/shubham/.xinitrc
-sudo chmod +x ~/.xinitrc
-```
-
-#### GNOME DISPLAY MANAGER
-
-Enable GDM:
-```sh
-sudo systemctl enable gdm.service
-```
-
-#### CONFIGURE NETWORK
-
-#### NETWORKMANAGER
-
-[https://wiki.archlinux.org/index.php/Networkmanager](https://wiki.archlinux.org/index.php/Networkmanager)
-
-NetworkManager is a program for providing detection and configuration for systems to automatically connect to network. NetworkManager's functionality can be useful for both wireless and wired networks.
-```sh
-sudo pacman -S --noconfirm dnsmasq networkmanager-openconnect networkmanager-openvpn networkmanager-pptp networkmanager-vpnc network-manager-applet nm-connection-editor gnome-keyring
-```
-```sh
-sudo systemctl disable dhcpcd.service
-```
-```sh
-sudo systemctl enable NetworkManager.service
-```
-
-
-## REBOOT
-
-We are now finally ready to boot in to the glory that Arch Linux is.
-But before rebooting, install Web Browser to get access to the installation manual out of the box:
-```sh
-sudo pacman -S --noconfirm chromium firefox
-```
-```sh
-sudo systemctl reboot
-```
 
 ## CONFIGURE SYSTEM
 
