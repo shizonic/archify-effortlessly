@@ -286,7 +286,8 @@ To download data from the fastest mirrors:
 
 To install Reflector:
 ```sh
-pacman -Sy --noconfirm reflector rsync curl python
+pacman -Sy --noconfirm reflector
+#todo  rsync curl python
 cp -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 reflector --country 'India' -f 20 -l 20 -n 20 --verbose --sort rate --save /etc/pacman.d/mirrorlist
 chmod +r /etc/pacman.d/mirrorlist
@@ -297,7 +298,8 @@ chmod +r /etc/pacman.d/mirrorlist
 
 The following command installs all packages contained in the "base" and "base-devel" package-group of the Arch Linux installer.
 ```sh
-pacstrap /mnt base base-devel intel-ucode zsh openssh git bash-completion reflector python pacman-contrib nano
+pacstrap /mnt base base-devel linux linux-firmware intel-ucode zsh openssh git bash-completion reflector pacman-contrib nano
+#todo python
 ```
 
 
