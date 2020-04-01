@@ -286,9 +286,9 @@ To download data from the fastest mirrors:
 
 To install Reflector:
 ```sh
-pacman -Sy --noconfirm reflector
+pacman -Sy --noconfirm reflector rsync curl
 cp -v /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-reflector --country 'India' -f 20 -l 20 -n 20 --verbose --sort rate --save /etc/pacman.d/mirrorlist
+reflector --country India --verbose --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
 chmod +r /etc/pacman.d/mirrorlist
 ```
 
@@ -465,7 +465,7 @@ timeout		0
 editor		yes
 console-mode	keep
 auto-entries	1
-auto-firmware   1
+auto-firmware    1
 default		arch
 ```
 
