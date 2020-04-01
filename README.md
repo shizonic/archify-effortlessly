@@ -689,22 +689,23 @@ sudo sed -i '/the setting of/s/^/#/' /etc/ssh/sshd_config
 sudo sed -i '/RhostsRSAAuthentication and HostbasedAuthentication/s/^/#/' /etc/ssh/sshd_config
 ```
 
-#### AURMAN - AUR HELPER
+#### YAY - AUR HELPER
 
-Install a AUR helper, AurMan, to start using Arch User Repository.
+Install an AUR helper, YAY, to start using Arch User Repository.
 
 Create a temporary working directory and navigate to it:
 ```sh
-mkdir -p /tmp/aurman_install
-cd /tmp/aurman_install
-curl -o aurman.tar.gz https://aur.archlinux.org/cgit/aur.git/snapshot/aurman.tar.gz
-tar zxvf aurman.tar.gz
-rm aurman.tar.gz
-cd aurman
-makepkg -csi --skippgpcheck --noconfirm
-aurman -S --noconfirm --noedit aurman
+sudo pacman -S git
+mkdir -p /tmp/yay_install
+cd /tmp/yay_install
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
 cd ~
-rm -rf /tmp/aurman_install
+rm -rf /tmp/yay_install
+```
+```sh
+todo --skippgpcheck --noconfirm
 ```
 
 #### BASH TOOLS
@@ -838,12 +839,12 @@ sudo pacman -S xf86-video-ati mesa libva-vdpau-driver lib32-mesa lib32-libva-vdp
 ```
 Proprietary GPU Drivers (available only on AUR at the time of writing):
 ```sh
-sudo aurman -S catalyst catalyst-libgl lib32-catalyst-libgl
+sudo yay -S catalyst catalyst-libgl lib32-catalyst-libgl
 ```
 
 #### [RECOMMENDED] ADDITIONAL FIRMWARE
 ```sh
-aurman -S --noconfirm --noedit wd719x-firmware aic94xx-firmware
+yay -S --noconfirm --noedit wd719x-firmware aic94xx-firmware
 sudo mkinitcpio -p linux
 ```
 
@@ -902,7 +903,7 @@ sudo pacman -S --noconfirm ttf-ubuntu-font-family noto-fonts ttf-liberation adob
 ```
 Install Shell & Icon Themes
 ```sh
-aurman -S --noconfirm --noedit macos-arc-white-theme macos-icon-theme
+yay -S --noconfirm --noedit macos-arc-white-theme macos-icon-theme
 sudo pacman -S --noconfirm arc-gtk-theme
 ```
 Add font configuration to "~/.config/fontconfig/fonts.conf"
@@ -1475,18 +1476,18 @@ Learn more about Pacman on the wiki page at:
 
 
 
-## AURMAN - AUR HELPER
+## YAY - AUR HELPER
 
 Most functions are similar to pacman.
 
 #### INSTALL PACKAGES FROM AUR
 ```sh
-aurman -S
+yay -S
 ```
 
 #### UPGRADE DATABASE AND PACKAGES FROM AUR
 ```sh
-aurman -Syu --devel --needed
+yay -Syu --devel --needed
 ```
 
 
@@ -1530,7 +1531,7 @@ sudo pacman -S --noconfirm texlive-core texlive-bin texlive-latexextra
 ```
 Install LaTeX IDE
 ```sh
-aurman -S --noconfirm --noedit texworks
+yay -S --noconfirm --noedit texworks
 ```
 Add "ModernCV" class for Resume
 ```sh
@@ -1579,7 +1580,7 @@ sudo freshclam
 
 #### BLOCK ADWARE
 ```sh
-aurman -S --noconfirm --noedit hosts-update
+yay -S --noconfirm --noedit hosts-update
 ```
 ```sh
 sudo sed -i 's/^127.0.0.1.*/127.0.0.1       zenbook-pro.localdomain localhost zenbook-pro/' /etc/hosts.local
@@ -1601,7 +1602,7 @@ sudo systemctl enable --now netdata.service
 
 #### VIRTUAL MACHINE
 ```sh
-aurman -S --noconfirm --noedit vmware-workstation12
+yay -S --noconfirm --noedit vmware-workstation12
 ```
 
 #### DOCKER
@@ -1627,7 +1628,7 @@ sudo pacman -S --noconfirm chromium
 sudo pacman -S --noconfirm firefox
 ```
 ```sh
-aurman -S --noconfirm --noedit google-chrome tor-browser
+yay -S --noconfirm --noedit google-chrome tor-browser
 ```
 
 #### DOWNLOAD/FILE-SHARE
@@ -1650,7 +1651,7 @@ sudo pacman -S --noconfirm thunderbird
 sudo pacman -S --noconfirm telegram-desktop
 ```
 ```sh
-aurman -S --noconfirm --noedit skypeforlinux-stable-bin
+yay -S --noconfirm --noedit skypeforlinux-stable-bin
 ```
 
 #### DESKTOP SHARING
@@ -1658,7 +1659,7 @@ aurman -S --noconfirm --noedit skypeforlinux-stable-bin
 sudo pacman -S --noconfirm remmina
 ```
 ```sh
-aurman -S --noconfirm --noedit teamviewer
+yay -S --noconfirm --noedit teamviewer
 ```
 
 
@@ -1679,7 +1680,7 @@ sudo pacman -S --noconfirm blender inkscape
 sudo pacman -S --noconfirm mypaint
 ```
 ```sh
-aurman -S --noconfirm --noedit pencil
+yay -S --noconfirm --noedit pencil
 ```
 
 #### PUBLISHING
@@ -1695,7 +1696,7 @@ sudo pacman -S --noconfirm scribus
 sudo pacman -S --noconfirm rhythmbox grilo grilo-plugins libgpod libdmapsharing gnome-python python-mako
 ```
 ```sh
-aurman -S --noconfirm --noedit spotify
+yay -S --noconfirm --noedit spotify
 ```
 
 #### AUDIO CODECS
@@ -1716,7 +1717,7 @@ sudo pacman -S --noconfirm audacity easytag soundconverter
 sudo pacman -S --noconfirm gstreamer flashplugin pepper-flash faac faad2 libdca libmad libmpeg2 x264 x265 libfdk-aac libquicktime
 ```
 ```sh
-aurman -S --noconfirm --noedit chromium-widevine
+yay -S --noconfirm --noedit chromium-widevine
 ```
 
 #### VIDEO CODECS
@@ -1729,7 +1730,7 @@ sudo pacman -S --noconfirm ffmpeg ffmpegthumbnailer ffmpegthumbs
 sudo pacman -S --noconfirm vlc gnome-mplayer mplayer
 ```
 ```sh
-aurman -S --noconfirm --nedit popcorntime-ce
+yay -S --noconfirm --nedit popcorntime-ce
 ```
 
 #### VIDEO EDITORS
@@ -1787,7 +1788,7 @@ sudo pacman -S --noconfirm meld
 
 #### SUBLIME TEXT 3
 ```sh
-aurman -S --noconfirm --noedit sublime-text-dev
+yay -S --noconfirm --noedit sublime-text-dev
 ```
 
 #### OPENJDK 8
@@ -1811,7 +1812,7 @@ sudo pacman -S --noconfirm jdk10-openjdk
 sudo pacman -Rnsc --noconfirm jdk7-openjdk jdk8-openjdk jdk9-openjdk jdk10-openjdk
 ```
 ```sh
-aurman -S --noconfirm --noedit jdk
+yay -S --noconfirm --noedit jdk
 ```
 
 #### CONFIGURE JDK
@@ -1835,7 +1836,7 @@ sudo archlinux-java unset
 
 #### SPRING TOOL SUITE
 ```sh
-aurman -S --noconfirm --noedit spring-tool-suite
+yay -S --noconfirm --noedit spring-tool-suite
 ```
 
 #### NETBEANS
@@ -1856,17 +1857,17 @@ sudo pacman -S --noconfirm android-tools
 
 #### ANDROID STUDIO
 ```sh
-aurman -S --noconfirm --noedit android-sdk android-sdk-platform-tools android-sdk-build-tools android-platform
+yay -S --noconfirm --noedit android-sdk android-sdk-platform-tools android-sdk-build-tools android-platform
 sudo gpasswd -a shubham sdkusers
 sudo chown -R :sdkusers /opt/android-sdk/
 sudo chmod -R g+w /opt/android-sdk/
 sudo /bin/sh -c 'export ANDROID_HOME=/opt/android-sdk >> /home/shubham/.bashrc'
-aurman -S --noconfirm --noedit android-studio
+yay -S --noconfirm --noedit android-studio
 ```
 
 #### JETBRAINS TOOLBOX
 ```sh
-aurman -S --noconfirm --noedit jetbrains-toolbox
+yay -S --noconfirm --noedit jetbrains-toolbox
 ```
 
 #### INTELLIJ IDEA
@@ -1876,7 +1877,7 @@ sudo pacman -S --noconfirm intellij-idea-community-edition
 
 #### INTELLIJ IDEA ULTIMATE EDITION
 ```sh
-aurman -S --noconfirm --noedit intellij-idea-ultimate-edition
+yay -S --noconfirm --noedit intellij-idea-ultimate-edition
 ```
 
 #### MONODEVELOP
@@ -1901,7 +1902,7 @@ sudo pacman -S --noconfirm nodejs
 
 #### MICROSOFT VISUAL STUDIO CODE
 ```sh
-aurman -S --noconfirm --noedit visual-studio-code-bin
+yay -S --noconfirm --noedit visual-studio-code-bin
 ```
 
 #### GIT GUI-s
@@ -1911,22 +1912,22 @@ sudo pacman -S --noconfirm gitg qgit
 
 #### KDIFF3
 ```sh
-aurman -S --noconfirm --noedit kdiff3
+yay -S --noconfirm --noedit kdiff3
 ```
 
 #### REGEXXER
 ```sh
-aurman -S --noconfirm --noedit regexxer
+yay -S --noconfirm --noedit regexxer
 ```
 
 #### POSTMAN
 ```sh
-aurman -S --noconfirm --noedit postman-bin
+yay -S --noconfirm --noedit postman-bin
 ```
 
 #### GITKRAKEN
 ```sh
-aurman -S --noconfirm --noedit gitkraken
+yay -S --noconfirm --noedit gitkraken
 ```
 
 
@@ -1988,7 +1989,7 @@ CONFIGURE_PHP "POSTGRESQL"
 
 #### ADMINER
 ```sh
-aurman -S --noconfirm --noedit adminer
+yay -S --noconfirm --noedit adminer
 ```
 Check config:
 ```sh
@@ -2017,7 +2018,7 @@ sudo passwd postgres
 su - postgres -c "initdb --locale ${LOCALE}.UTF-8 -D /var/lib/postgres/data"
 sudo systemctl enable --now postgresql.service
 sudo pacman -S --noconfirm postgis
-aurman -S --noconfirm --noedit pgrouting
+yay -S --noconfirm --noedit pgrouting
 ```
 
 #### CONFIGURE PHP
@@ -2135,7 +2136,7 @@ sudo timedatectl set-ntp true
 
 #### BROWSER PROFILE SYNC DAEMON
 ```sh
-aurman -S --noconfirm --noedit profile-sync-daemon
+yay -S --noconfirm --noedit profile-sync-daemon
 ```
 ```sh
 psd
