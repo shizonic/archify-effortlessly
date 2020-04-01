@@ -903,7 +903,7 @@ sudo pacman -S --noconfirm ttf-ubuntu-font-family noto-fonts ttf-liberation adob
 ```
 Install Shell & Icon Themes
 ```sh
-yay -S --noconfirm --noedit macos-arc-white-theme macos-icon-theme
+yay -S --noconfirm --noedit mojave-gtk-theme-git mojave-ct-icon-theme
 sudo pacman -S --noconfirm arc-gtk-theme
 ```
 Add font configuration to "~/.config/fontconfig/fonts.conf"
@@ -956,15 +956,29 @@ sudo ln -s ../conf.avail/11-lcdfilter-default.conf
 cd ~
 ```
 
+#### GNOME SHELL CONNECTION
+
+Install the browser-shell connector:
+```sh
+sudo pacman -S --noconfirm chrome-gnome-shell
+```
+Use web browser and go to:
+
+[https://extensions.gnome.org/](https://extensions.gnome.org/)
+
+Choose "Allow and remember" when prompted for shell integration permission.
+
+
 #### CHANGE LOOK AND FEEL
 
-Enable User themes Extension and configure appreance from GNOME Tweak Tool:
+Install and enable [User Themes](https://extensions.gnome.org/extension/19/user-themes/) extension.
+
+Configure appreance from GNOME Tweak Tool:
 ```
-Applications		to		MacOS-Arc-White
+Applications		to		Mojave-Light
 Cursor			to		Adwaita (default)
-Icons			to		MacOS
-Shell			to		Arc
-Animations	        to		Enabled
+Icons			to		Mojave-CT
+Shell			to		Mojave-Light
 ```
 Open Gnome Tweak Tool, goto fonts tab and change the following options:
 ```
@@ -979,16 +993,6 @@ Sacling Factor		to		1.00
 
 
 #### GNOME SHELL EXTENSIONS
-
-Install the browser-shell connector:
-```sh
-sudo pacman -S --noconfirm chrome-gnome-shell
-```
-Use web browser and go to:
-
-[https://extensions.gnome.org/](https://extensions.gnome.org/)
-
-Choose "Allow and remember" when prompted for shell integration permission.
 
 Install and configure extensions:
 
