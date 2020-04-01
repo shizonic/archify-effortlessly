@@ -695,17 +695,14 @@ Install an AUR helper, YAY, to start using Arch User Repository.
 
 Create a temporary working directory and navigate to it:
 ```sh
-sudo pacman -S git
+sudo pacman -S --noconfirm git
 mkdir -p /tmp/yay_install
 cd /tmp/yay_install
 git clone https://aur.archlinux.org/yay.git
 cd yay
-makepkg -si
+makepkg -si --noconfirm
 cd ~
 rm -rf /tmp/yay_install
-```
-```sh
-todo --skippgpcheck --noconfirm
 ```
 
 #### BASH TOOLS
@@ -844,7 +841,7 @@ sudo yay -S catalyst catalyst-libgl lib32-catalyst-libgl
 
 #### [RECOMMENDED] ADDITIONAL FIRMWARE
 ```sh
-yay -S --noconfirm --noedit wd719x-firmware aic94xx-firmware
+yay -S --noconfirm wd719x-firmware aic94xx-firmware
 sudo mkinitcpio -p linux
 ```
 
@@ -903,7 +900,7 @@ sudo pacman -S --noconfirm ttf-ubuntu-font-family noto-fonts ttf-liberation adob
 ```
 Install Shell & Icon Themes
 ```sh
-yay -S --noconfirm --noedit mojave-gtk-theme-git mojave-ct-icon-theme
+yay -S --noconfirm mojave-gtk-theme-git mojave-ct-icon-theme
 sudo pacman -S --noconfirm arc-gtk-theme
 ```
 Add font configuration to "~/.config/fontconfig/fonts.conf"
@@ -996,7 +993,9 @@ Sacling Factor		to		1.00
 
 Install and configure extensions:
 
-[Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/) - moves dock to bottom of screen
+[Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/)
+
+[Caffeine](https://extensions.gnome.org/extension/517/caffeine/)
 
 [Dynamic Top Bar](https://extensions.gnome.org/extension/885/dynamic-top-bar/) - transparency level 0.30
 
@@ -1320,7 +1319,7 @@ Restart, and check that there is no Pulseaudio process for the gdm user.
 
 #### REMOVE GNOME GAMES
 ```sh
-sudo pacman -Rnsc --noconfirm atomix four-in-a-row five-or-more gnome-chess gnome-klotski gnome-mahjongg gnome-mines gnome-nibbles gnome-robots gnome-sudoku gnome-tetravex gnome-taquin swell-foop hitori iagno quadrapassel lightsoff tali
+sudo pacman -Rnsc --noconfirm four-in-a-row five-or-more gnome-chess gnome-klotski gnome-mahjongg gnome-mines gnome-nibbles gnome-robots gnome-sudoku gnome-tetravex gnome-taquin swell-foop hitori iagno quadrapassel lightsoff tali
 ```
 
 #### FIX NOISE IN HEADPHONES
@@ -1386,7 +1385,7 @@ sudo /bin/sh -c 'echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.d/99
 
 #### INSTALL PACKAGE CLEANER
 ```sh
-sudo pacman -S pacman-contrib
+sudo pacman -S --noconfirm pacman-contrib
 ```
 ```sh
 sudo systemctl enable --now paccache.timer
@@ -1535,7 +1534,7 @@ sudo pacman -S --noconfirm texlive-core texlive-bin texlive-latexextra
 ```
 Install LaTeX IDE
 ```sh
-yay -S --noconfirm --noedit texworks
+yay -S --noconfirm texworks
 ```
 Add "ModernCV" class for Resume
 ```sh
@@ -1584,7 +1583,7 @@ sudo freshclam
 
 #### BLOCK ADWARE
 ```sh
-yay -S --noconfirm --noedit hosts-update
+yay -S --noconfirm hosts-update
 ```
 ```sh
 sudo sed -i 's/^127.0.0.1.*/127.0.0.1       zenbook-pro.localdomain localhost zenbook-pro/' /etc/hosts.local
@@ -1606,7 +1605,7 @@ sudo systemctl enable --now netdata.service
 
 #### VIRTUAL MACHINE
 ```sh
-yay -S --noconfirm --noedit vmware-workstation12
+yay -S --noconfirm vmware-workstation12
 ```
 
 #### DOCKER
@@ -1632,7 +1631,7 @@ sudo pacman -S --noconfirm chromium
 sudo pacman -S --noconfirm firefox
 ```
 ```sh
-yay -S --noconfirm --noedit google-chrome tor-browser
+yay -S --noconfirm google-chrome tor-browser
 ```
 
 #### DOWNLOAD/FILE-SHARE
@@ -1655,7 +1654,7 @@ sudo pacman -S --noconfirm thunderbird
 sudo pacman -S --noconfirm telegram-desktop
 ```
 ```sh
-yay -S --noconfirm --noedit skypeforlinux-stable-bin
+yay -S --noconfirm skypeforlinux-stable-bin
 ```
 
 #### DESKTOP SHARING
@@ -1663,7 +1662,7 @@ yay -S --noconfirm --noedit skypeforlinux-stable-bin
 sudo pacman -S --noconfirm remmina
 ```
 ```sh
-yay -S --noconfirm --noedit teamviewer
+yay -S --noconfirm teamviewer
 ```
 
 
@@ -1684,7 +1683,7 @@ sudo pacman -S --noconfirm blender inkscape
 sudo pacman -S --noconfirm mypaint
 ```
 ```sh
-yay -S --noconfirm --noedit pencil
+yay -S --noconfirm pencil
 ```
 
 #### PUBLISHING
@@ -1700,7 +1699,7 @@ sudo pacman -S --noconfirm scribus
 sudo pacman -S --noconfirm rhythmbox grilo grilo-plugins libgpod libdmapsharing gnome-python python-mako
 ```
 ```sh
-yay -S --noconfirm --noedit spotify
+yay -S --noconfirm spotify
 ```
 
 #### AUDIO CODECS
@@ -1721,7 +1720,7 @@ sudo pacman -S --noconfirm audacity easytag soundconverter
 sudo pacman -S --noconfirm gstreamer flashplugin pepper-flash faac faad2 libdca libmad libmpeg2 x264 x265 libfdk-aac libquicktime
 ```
 ```sh
-yay -S --noconfirm --noedit chromium-widevine
+yay -S --noconfirm chromium-widevine
 ```
 
 #### VIDEO CODECS
@@ -1792,7 +1791,7 @@ sudo pacman -S --noconfirm meld
 
 #### SUBLIME TEXT 3
 ```sh
-yay -S --noconfirm --noedit sublime-text-dev
+yay -S --noconfirm sublime-text-dev
 ```
 
 #### OPENJDK 8
@@ -1816,7 +1815,7 @@ sudo pacman -S --noconfirm jdk10-openjdk
 sudo pacman -Rnsc --noconfirm jdk7-openjdk jdk8-openjdk jdk9-openjdk jdk10-openjdk
 ```
 ```sh
-yay -S --noconfirm --noedit jdk
+yay -S --noconfirm jdk
 ```
 
 #### CONFIGURE JDK
@@ -1840,7 +1839,7 @@ sudo archlinux-java unset
 
 #### SPRING TOOL SUITE
 ```sh
-yay -S --noconfirm --noedit spring-tool-suite
+yay -S --noconfirm spring-tool-suite
 ```
 
 #### NETBEANS
@@ -1861,17 +1860,17 @@ sudo pacman -S --noconfirm android-tools
 
 #### ANDROID STUDIO
 ```sh
-yay -S --noconfirm --noedit android-sdk android-sdk-platform-tools android-sdk-build-tools android-platform
+yay -S --noconfirm android-sdk android-sdk-platform-tools android-sdk-build-tools android-platform
 sudo gpasswd -a shubham sdkusers
 sudo chown -R :sdkusers /opt/android-sdk/
 sudo chmod -R g+w /opt/android-sdk/
 sudo /bin/sh -c 'export ANDROID_HOME=/opt/android-sdk >> /home/shubham/.bashrc'
-yay -S --noconfirm --noedit android-studio
+yay -S --noconfirm android-studio
 ```
 
 #### JETBRAINS TOOLBOX
 ```sh
-yay -S --noconfirm --noedit jetbrains-toolbox
+yay -S --noconfirm jetbrains-toolbox
 ```
 
 #### INTELLIJ IDEA
@@ -1881,7 +1880,7 @@ sudo pacman -S --noconfirm intellij-idea-community-edition
 
 #### INTELLIJ IDEA ULTIMATE EDITION
 ```sh
-yay -S --noconfirm --noedit intellij-idea-ultimate-edition
+yay -S --noconfirm intellij-idea-ultimate-edition
 ```
 
 #### MONODEVELOP
@@ -1906,7 +1905,7 @@ sudo pacman -S --noconfirm nodejs
 
 #### MICROSOFT VISUAL STUDIO CODE
 ```sh
-yay -S --noconfirm --noedit visual-studio-code-bin
+yay -S --noconfirm visual-studio-code-bin
 ```
 
 #### GIT GUI-s
@@ -1916,22 +1915,22 @@ sudo pacman -S --noconfirm gitg qgit
 
 #### KDIFF3
 ```sh
-yay -S --noconfirm --noedit kdiff3
+yay -S --noconfirm kdiff3
 ```
 
 #### REGEXXER
 ```sh
-yay -S --noconfirm --noedit regexxer
+yay -S --noconfirm regexxer
 ```
 
 #### POSTMAN
 ```sh
-yay -S --noconfirm --noedit postman-bin
+yay -S --noconfirm postman-bin
 ```
 
 #### GITKRAKEN
 ```sh
-yay -S --noconfirm --noedit gitkraken
+yay -S --noconfirm gitkraken
 ```
 
 
@@ -1993,7 +1992,7 @@ CONFIGURE_PHP "POSTGRESQL"
 
 #### ADMINER
 ```sh
-yay -S --noconfirm --noedit adminer
+yay -S --noconfirm adminer
 ```
 Check config:
 ```sh
@@ -2022,7 +2021,7 @@ sudo passwd postgres
 su - postgres -c "initdb --locale ${LOCALE}.UTF-8 -D /var/lib/postgres/data"
 sudo systemctl enable --now postgresql.service
 sudo pacman -S --noconfirm postgis
-yay -S --noconfirm --noedit pgrouting
+yay -S --noconfirm pgrouting
 ```
 
 #### CONFIGURE PHP
@@ -2140,7 +2139,7 @@ sudo timedatectl set-ntp true
 
 #### BROWSER PROFILE SYNC DAEMON
 ```sh
-yay -S --noconfirm --noedit profile-sync-daemon
+yay -S --noconfirm profile-sync-daemon
 ```
 ```sh
 psd
