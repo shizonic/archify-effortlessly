@@ -482,6 +482,28 @@ options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.preliminary_hw_suppor
 
 ## INSTALL DESKTOP ENVIRONMENT
 
+
+#### XORG
+
+[https://wiki.archlinux.org/index.php/Xorg](https://wiki.archlinux.org/index.php/Xorg)
+
+Xorg is the public, open-source implementation of the X window system version 11.
+
+```sh
+pacman -S --noconfirm xorg-server xorg-xbacklight xbindkeys xorg-xinit xorg-xinput xorg-twm xorg-xclock xterm xdotool
+
+```
+
+#### WAYLAND
+
+[https://wiki.archlinux.org/index.php/Wayland](https://wiki.archlinux.org/index.php/Wayland)
+
+Wayland is a protocol for a compositing window manager to talk to its clients, as well as a library implementing the protocol.
+
+```sh
+pacman -S --noconfirm weston xorg-server-xwayland
+```
+
 #### DESKTOP ENVIRONMENT
 
 Install GNOME Desktop environment with:
@@ -513,15 +535,11 @@ systemctl disable dhcpcd.service
 systemctl enable NetworkManager.service
 ```
 
-
-## REBOOT
-
 We are now finally ready to boot in to the glory that Arch Linux is.
 But before rebooting, install Web Browser to get access to the installation manual out of the box:
 ```sh
 sudo pacman -S --noconfirm chromium firefox
 ```
-
 
 #### UNMOUNT PARTITIONS
 
@@ -750,26 +768,6 @@ A file system (or filesystem) is a means to organize data expected to be retaine
 sudo timedatectl set-ntp true
 ```
 
-#### XORG
-
-[https://wiki.archlinux.org/index.php/Xorg](https://wiki.archlinux.org/index.php/Xorg)
-
-Xorg is the public, open-source implementation of the X window system version 11.
-
-```sh
-sudo pacman -S xorg-server xorg-xbacklight xbindkeys xorg-xinit xorg-xinput xorg-twm xorg-xclock xterm xdotool
-
-```
-
-#### WAYLAND
-
-[https://wiki.archlinux.org/index.php/Wayland](https://wiki.archlinux.org/index.php/Wayland)
-
-Wayland is a protocol for a compositing window manager to talk to its clients, as well as a library implementing the protocol.
-
-```sh
-sudo pacman -S --noconfirm weston xorg-server-xwayland
-```
 
 #### TOUCHPAD DRIVER
 ```sh
@@ -805,12 +803,7 @@ For the system I'm using to generate this guide, I use NVIDIA driver. You can us
 ###### [REQUIRED] BUMBLEBEE (NVIDIA)
 ```sh
 sudo pacman -S --needed xf86-video-intel bumblebee nvidia nvidia-settings lib32-virtualgl lib32-nvidia-utils mesa lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
-```
-```
-NOTE: Pick nvidia-utils if conflict.
-NOTE: Pick lib32-libglvnd if conflict.
-NOTE: Pick mesa-libgl if conflict.
-```
+```q
 Add username to bumblebee group:
 ```sh
 sudo gpasswd -a shubham bumblebee
@@ -870,11 +863,6 @@ Install Web Browser:
 ```sh
 sudo pacman -S --noconfirm chromium firefox
 ```
-If Chromium rendering is intermittently choppy, fix it with:
-```sh
-echo '--disable-gpu-driver-bug-workarounds' >> ~/.config/chromium-flags.conf
-```
-Visit URL - [https://github.com/shubhamgulati91/install-arch-linux](https://github.com/shubhamgulati91/install-arch-linux)
 
 
 #### CONFIGURE SYSTEM SETTINGS
@@ -2175,10 +2163,6 @@ journalctl --vacuum-size=100M
 ```
 
 ## THE END
-
-#### A little show-off at
-
-[https://github.com/shubhamgulati91/install-arch-linux-screenshots/tree/master/0-screenshots](https://github.com/shubhamgulati91/install-arch-linux-screenshots/tree/master/0-screenshots)
 
 
 ## CREDITS
