@@ -982,10 +982,10 @@ Shell			to		Mojave-Light
 ```
 Open Gnome Tweak Tool, goto fonts tab and change the following options:
 ```
-Window Titles   	to		Ubuntu Bold			10
-Interface		to		Ubuntu Regular			10
-Documents       	to		Ubuntu Regular			10
-Monospace		to		Ubuntu Mono Regular		10
+Interface Text		to		Ubuntu Regular			11
+Documents Text      	to		Ubuntu Regular			11
+Monospace Text		to		Ubuntu Mono Regular		10
+Legacy Window Titles   	to		Ubuntu Bold			11
 Hinting			to		Slight
 Antialiasing		to		Rgba
 Sacling Factor		to		1.00
