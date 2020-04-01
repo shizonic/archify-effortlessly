@@ -900,7 +900,7 @@ sudo pacman -S --noconfirm ttf-ubuntu-font-family noto-fonts ttf-liberation adob
 ```
 Install Shell & Icon Themes
 ```sh
-yay -S --noconfirm mojave-gtk-theme-git mojave-ct-icon-theme
+yay -S --noconfirm mojave-gtk-theme mojave-ct-icon-theme
 sudo pacman -S --noconfirm arc-gtk-theme
 ```
 Add font configuration to "~/.config/fontconfig/fonts.conf"
