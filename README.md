@@ -590,6 +590,9 @@ arch-chroot /mnt /bin/bash
 
 #### LOGIN TO NEW USER
 You can log into your new installation as root or with newly created user, using the password you specified with passwd.
+```sh
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null shubham@192.168.0.xxx
+```
 
 
 #### CONFIGURE XINITRC
