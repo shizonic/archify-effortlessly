@@ -972,10 +972,10 @@ Install and enable [User Themes](https://extensions.gnome.org/extension/19/user-
 
 Configure appreance from GNOME Tweak Tool:
 ```
-Applications		to		Mojave-Light
+Applications		to		Mojave-dark
 Cursor			to		Adwaita (default)
 Icons			to		Mojave-CT
-Shell			to		Mojave-Light
+Shell			to		Mojave-dark
 ```
 Open Gnome Tweak Tool, goto fonts tab and change the following options:
 ```
