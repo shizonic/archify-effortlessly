@@ -79,7 +79,7 @@ lsblk
 ```
 Assuming the name of flash drive was "/dev/sda", use "dd" to write bootable iso to the flash drive.
 ```sh
-umount /run/media/shubham/ARCH_201808
+umount /run/media/shubham/ARCH
 sudo dd if=/dev/zero of=/dev/sda bs=4096 count=4096
 sudo wipefs -af /dev/sda
 sudo parted --script -a optimal /dev/sda \
