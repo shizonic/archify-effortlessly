@@ -480,7 +480,7 @@ options		root=/dev/nvme0n1p2 rw resume=/dev/nvme0n1p3 i915.preliminary_hw_suppor
 Xorg is the public, open-source implementation of the X window system version 11.
 
 ```sh
-pacman -S --noconfirm xorg-server xorg-xbacklight xbindkeys xorg-xinit xorg-xinput xorg-twm xorg-xclock xterm xdotool
+pacman -S --noconfirm xorg-server xorg-xbacklight xbindkeys xorg-xev xorg-xinit xorg-xinput xorg-twm xorg-xclock xterm xdotool
 
 ```
 
