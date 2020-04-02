@@ -785,7 +785,7 @@ Fontconfig is a library designed to provide a list of available fonts to applica
 sudo pacman -S --noconfirm --asdeps --needed cairo fontconfig freetype2
 ```
 
-#### CONFIGURE GPU DRIVERS
+#### [NOT RECOMMENDED] CONFIGURE GPU DRIVERS
 
 ###### CHECK CARDS
 
@@ -979,12 +979,12 @@ Shell			to		Mojave-dark
 ```
 Open Gnome Tweak Tool, goto fonts tab and change the following options:
 ```
-Interface Text		to		Ubuntu Regular			11
-Documents Text      	to		Ubuntu Regular			11
-Monospace Text		to		Ubuntu Mono Regular		10
-Legacy Window Titles   	to		Ubuntu Bold			11
+Interface Text		to		Ubuntu Regular			10
+Documents Text      	to		Ubuntu Regular			10
+Monospace Text		to		Ubuntu Mono Regular		9
+Legacy Window Titles   	to		Ubuntu Bold			10
 Hinting			to		Slight
-Antialiasing		to		Rgba
+Antialiasing		to		Subpixel (rgba)
 Sacling Factor		to		1.00
 ```
 
