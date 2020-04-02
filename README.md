@@ -1373,6 +1373,23 @@ sudo systemctl enable --now accounts-daemon
 sudo /bin/sh -c 'echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.d/99-sysctl.conf'
 ```
 
+#### CONFIGURE ADDITIONAL FN KEY SHORTCUTS
+
+Install and check output of acpi_listen:
+```sh
+sudo pacman -S --noconfirm acpid
+sudo systemctl start acpid.service
+acpi_listen
+```
+```sh
+xev | grep --line-buffered keysym
+```
+
+Press Fn+Arrow Keys.
+Might be mapped to Audio Prev/Next, Stop and Play/Pause.
+Might be mapped to XF86AudioPrev, XF86AudioNext, XF86AudioStop, XF86AudioPlay
+
+
 #### INSTALL PACKAGE CLEANER
 ```sh
 sudo pacman -S --noconfirm pacman-contrib
