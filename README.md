@@ -790,7 +790,7 @@ For the system I'm using to generate this guide, I use NVIDIA driver. You can us
 ###### [REQUIRED] BUMBLEBEE (NVIDIA)
 ```sh
 sudo pacman -S --needed xf86-video-intel bumblebee nvidia nvidia-settings lib32-virtualgl lib32-nvidia-utils mesa lib32-mesa-libgl lib32-mesa-demos mesa-demos libva-vdpau-driver nvidia-libgl lib32-opencl-nvidia lib32-mesa-vdpau
-```q
+```
 Add username to bumblebee group:
 ```sh
 sudo gpasswd -a shubham bumblebee
