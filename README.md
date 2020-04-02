@@ -105,16 +105,6 @@ Save settings and reboot.
 ```
 
 
-#### SET KERNEL BOOT OPTIONS
-
-Point the current boot device to the drive containing the Arch installation media.
-
-To avoid problems such as very tiny fonts on 4k display, boot the installation medium with kernel options which will disable console frame buffer. To do this, when selection menu appears, press E, type nomodeset in the very beginning of the existing boot options.
-```
-nomodeset [...]
-```
-
-
 #### CHECK BOOT MODE
 
 If UEFI mode is enabled on an UEFI motherboard, Archiso will boot Arch Linux accordingly via systemd-boot. To verify this, use the command:
@@ -561,10 +551,6 @@ systemctl reboot
 ```
 Remove the installation media.
 
-As soon as you turn-on the system to avoid booting into 4k resolution mode, edit kernel parameters from boot menu:
-```
-nomodeset [...]
-```
 If something goes wrong at this point, use the installation media to remount partitions and chroot into the installed system.
 ```
 wifi-menu -o
