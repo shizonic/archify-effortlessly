@@ -455,7 +455,7 @@ timeout		0
 editor		yes
 console-mode	keep
 auto-entries	1
-auto-firmware    1
+auto-firmware   1
 default		arch
 ```
 
