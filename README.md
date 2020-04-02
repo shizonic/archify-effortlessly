@@ -936,6 +936,7 @@ sudo sed -i '/^#export FREETYPE_PROPERTIES=.*/s/^#//' /etc/profile.d/freetype2.s
 Then create the following symbolic links in /etc/fonts/conf.d if they aren’t already present:
 ```sh
 cd /etc/fonts/conf.d
+sudo rm ./10-hinting-slight.conf
 sudo ln -s ../conf.avail/10-hinting-slight.conf
 sudo ln -s ../conf.avail/10-sub-pixel-rgb.conf
 sudo ln -s ../conf.avail/11-lcdfilter-default.conf
