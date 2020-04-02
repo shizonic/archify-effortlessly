@@ -1511,7 +1511,8 @@ cmatrix | lolcat
 
 #### ACCESSORIES
 ```sh
-sudo pacman -S --noconfirm synapse terminator catfish
+sudo pacman -S --noconfirm synapse terminator
+sudo pacman -S --noconfirm catfish
 ```
 
 ## OFFICE APPS
