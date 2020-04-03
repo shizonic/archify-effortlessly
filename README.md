@@ -1378,7 +1378,7 @@ sudo /bin/sh -c 'echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.d/99
 Install and check output of acpi_listen:
 ```sh
 sudo pacman -S --noconfirm acpid
-sudo systemctl start acpid.service
+sudo systemctl enable --now acpid.service
 acpi_listen
 ```
 ```sh
