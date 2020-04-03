@@ -1404,7 +1404,7 @@ sudo systemctl enable --now acpid.service
 acpi_listen
 ```
 ```sh
-xev | sed -ne '/^KeyPress/,/^$/p'
+xev -event keyboard
 ```
 
 Press Fn+Arrow Keys.
