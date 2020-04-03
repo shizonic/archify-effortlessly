@@ -971,7 +971,7 @@ Open Gnome Tweak Tool, goto fonts tab and change the following options:
 ```
 Interface Text		to		Ubuntu Regular			10
 Documents Text      	to		Ubuntu Regular			10
-Monospace Text		to		Ubuntu Mono Regular		9
+Monospace Text		to		Ubuntu Mono Regular		10
 Legacy Window Titles   	to		Ubuntu Bold			10
 Hinting			to		Slight
 Antialiasing		to		Subpixel (rgba)
