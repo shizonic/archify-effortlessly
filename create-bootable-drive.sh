@@ -6,8 +6,8 @@ clear
 init=0
 script_action="test"
 iso_directory="$HOME/Downloads"
-iso_name=
-drive_name=
+iso_name=arch
+drive_name=sda
 
 args="$(getopt -o 'ia:f:d:' --long initialize,action:,file:,drive: --name "$0" -- "$@")"
 
@@ -63,8 +63,23 @@ if [[ ! -z $* ]]; then
   echo
 fi
 
-if [[ ! $init -eq 1 ]]; then
+if [[ $init -ne 1 ]]; then
   lsblk
+  echo
+
+  read -p "Enter the action[test|write][$script_action]: " script_action_input
+  if [[ ! -z $script_action_input ]]; then
+    script_action=$script_action_input
+  fi
+  read -p "Enter the initial name of iso[$iso_name]: " iso_name_input
+  if [[ ! -z $iso_name_input ]]; then
+    iso_name=$iso_name_input
+  fi
+  read -p "Enter the name of flash drive[$drive_name]: " drive_name_input
+  if [[ ! -z $drive_name_input ]]; then
+    drive_name=$drive_name_input
+  fi
+  
   echo
 fi
 
