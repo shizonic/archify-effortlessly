@@ -60,22 +60,23 @@ shift $(($OPTIND - 1))
 if [[ ! -z $* ]]; then
   printf "Unused arguments: %s" "$*"
   echo
+  echo
 fi
 
 if [[ ! $init -eq 1 ]]; then
-  echo
   lsblk
+  echo
 fi
 
 if [[ ! -z $iso_directory && ! -z $iso_name ]]; then
   iso_file="$(find "$iso_directory" -name "$iso_name*.iso" -printf "%f\n" | head -n 1)"
 fi
 
-echo
 echo "Run mode: $script_action"
 echo "Image dir: $iso_directory"
 echo "Image file: $iso_file"
 echo "Drive name: $drive_name"
+echo
 
 if [[ $script_action == "write" && ! -z $iso_file && ! -z $drive_name ]]; then
   if [[ $(findmnt -M /dev/${drive_name}1) ]]; then
