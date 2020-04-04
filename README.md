@@ -1422,7 +1422,7 @@ WantedBy=xinitrc.target
 ```
 Enable the service
 ```sh
-sudo systemctl enable --now xkbcomp.service
+sudo systemctl enable xkbcomp.service
 ```
 
 
