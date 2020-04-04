@@ -75,6 +75,9 @@ NVIDIA® GeForce® GTX 960M with 4GB GDDR5 VRAM
 
 Save script to a sh file and execute.
 ```sh
+./create-bootable-drive.sh
+```
+```sh
 ./create-bootable-drive.sh -i -a write -f arch -d sda
 ```
 
