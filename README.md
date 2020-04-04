@@ -1370,6 +1370,10 @@ acpi_listen
 ```sh
 xev -event keyboard
 ```
+Temporary bug fix
+```sh
+sudo pacman -U https://archive.archlinux.org/packages/x/xkeyboard-config/xkeyboard-config-2.28-1-any.pkg.tar.xz
+```
 Create new keyboard symbols
 ```sh
 mkdir -p $HOME/.xkb/symbols
