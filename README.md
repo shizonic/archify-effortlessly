@@ -1370,10 +1370,60 @@ acpi_listen
 ```sh
 xev -event keyboard
 ```
+Create new keyboard symbols
+```sh
+mkdir -p $HOME/.xkb/symbols
+sudo nano $HOME/.xkb/symbols/custom
+```
+```
+partial alphanumeric_keys
+xkb_symbols "fn" {
+    include "inet(evdev)"
+    key <I171>   {      [ End                   ]       };
+    key <I172>   {      [ Next, Next            ]       };
+    key <I173>   {      [ Home                  ]       };
+    key <I174>   {      [ Prior, Prior          ]       };
+};
+```
+Backup existing keyboard map
+```sh
+mkdir -p $HOME/.xkb/keymap
+setxkbmap -print > $HOME/.xkb/keymap/xkbbase
+```
+```sh
+cp $HOME/.xkb/keymap/xkbbase $HOME/.xkb/keymap/xkbcustom
+```
+Add custom(fn) to xkb_symbols in the new xkbcustom keymap
+```
+xkb_keymap {
+	xkb_keycodes  { include "evdev+aliases(qwerty)"	};
+	xkb_types     { include "complete"	};
+	xkb_compat    { include "complete"	};
+	xkb_symbols   { include "pc+us+inet(evdev)+custom(fn)"	};
+	xkb_geometry  { include "pc(pc105)"	};
+};
+```
+Create and enable systemd service to set keyboard map at start of X session
+```sh
+sudo nano /etc/systemd/system/xkbcomp.service
+```
+```
+[Unit]
+Description=Set xkbd map
+After=xinitrc.target
 
-Press Fn+Arrow Keys.
-Might be mapped to Audio Prev/Next, Stop and Play/Pause.
-Might be mapped to XF86AudioPrev, XF86AudioNext, XF86AudioStop, XF86AudioPlay
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/xkbcustom $DISPLAY
+
+[Install]
+WantedBy=xinitrc.target
+```
+Enable the service
+```sh
+sudo systemctl enable --now xkbcomp.service
+```
 
 
 #### INSTALL PACKAGE CLEANER
