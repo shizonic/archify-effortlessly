@@ -1424,6 +1424,16 @@ Enable the service
 ```sh
 sudo systemctl enable xkbcomp.service
 ```
+```sh
+nano ~/.xsession
+```
+```sh
+if [ -d $HOME/.xkb/keymap ]; then
+  setxkbmap -print | \
+    sed -e '/xkb_symbols/s/"[[:space:]]/+custom(fn)&/' > $HOME/.xkb/keymap/xkbcustom
+  xkbcomp -w0 -I$HOME/.xkb -R$HOME/.xkb keymap/xkbcustom $DISPLAY
+fi
+```
 
 
 #### INSTALL PACKAGE CLEANER
