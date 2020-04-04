@@ -75,46 +75,7 @@ NVIDIA® GeForce® GTX 960M with 4GB GDDR5 VRAM
 
 Save script to a sh file and execute.
 ```sh
-clear
-lsblk
-echo
-
-iso_directory_default="$HOME/Downloads"
-read -p "Enter the path of iso[$iso_directory_default]: " iso_directory
-iso_directory="${iso_directory:-$iso_directory_default}"
-
-iso_name_default="ubuntu"
-read -p "Enter the initial name of iso[$iso_name_default]: " iso_name
-iso_name="${iso_name:-$iso_name_default}"
-
-iso_file="$(find "$iso_directory" -name "$iso_name*.iso" -printf "%f\n" | head -n 1)"
-echo "Image file:" $iso_file
-
-drive_name_default="sda"
-read -p "Enter the name of flash drive[$drive_name_default]: " drive_name
-drive_name="${drive_name:-$drive_name_default}"
-echo
-
-if [[ $(findmnt -M /dev/${drive_name}1) ]]; then
-    sudo umount /dev/${drive_name}1
-fi
-sudo dd if=/dev/zero of=/dev/$drive_name bs=4096 count=4096
-sudo wipefs -af /dev/$drive_name
-sudo parted --script -a optimal /dev/$drive_name \
-    mklabel gpt \
-    mkpart primary fat32 0% 100% \
-    name 1 ${iso_name^^}
-sudo parted /dev/$drive_name 'unit GiB print'
-gdisk -l /dev/$drive_name
-echo
-sudo mkfs.vfat -F32 -n ${iso_name^^} /dev/${drive_name}1
-lsblk /dev/$drive_name
-echo
-
-sudo dd bs=4M if=$iso_file of=/dev/$drive_name status=progress oflag=sync
-
-echo
-lsblk
+./create-bootable-drive.sh -i -a write -f ubuntu -d sda
 ```
 
 
